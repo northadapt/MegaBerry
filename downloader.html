@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Downloader | MegaBerry</title>
+  <meta name="description" content="Your MegaBerry studio.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="app" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="app__content cm" data-dl>
+        <div class="cm__layout">
+          <aside class="cm__side">
+            <section class="cm__card"><h2>Supported Platforms</h2><ul class="dl__plat"><li>TikTok</li><li>Instagram</li><li>Facebook</li><li>YouTube</li><li>X (Twitter)</li></ul></section>
+            <section class="cm__card"><h2>Cloud Storage</h2><p>All downloads are automatically saved to your storage. Access them anytime from the Downloads section in your Studio.</p><a class="gk-btn gk-btn--solid dl__studio" href="studio.html">View in Studio →</a></section>
+            <section class="cm__card"><h2>Your Stats</h2><dl class="cm__stats"><div><dt>Total Downloads</dt><dd data-dl-total>900</dd></div><div><dt>Time Saved</dt><dd class="is-ok">1d 6h</dd></div></dl></section>
+          </aside>
+          <div class="cm__main">
+            <section class="cm__card"><div class="cm__head"><h1>Download Zone</h1><span class="cm__pill" data-dl-count>0 / 20 links</span></div>
+              <textarea class="dl__urls" rows="6" data-dl-urls aria-label="Video URLs" placeholder="Paste video URLs here, one per line...&#10;&#10;https://tiktok.com/@user/video/123&#10;https://instagram.com/reel/abc"></textarea>
+              <button class="gk-btn gk-btn--solid gk-btn--lg gen__go dl__go" type="button" data-dl-go disabled>Start Download</button>
+            </section>
+            <div class="cm__empty dl__empty" data-dl-empty><strong>No downloads yet</strong><span>Paste video links in the Download Zone above to get started.</span></div>
+            <ul class="dl__list" data-dl-list hidden></ul>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var $ = function (s) { return document.querySelector(s); }, ta = $("[data-dl-urls]"), go = $("[data-dl-go]"), total = 900; var toastEl = document.querySelector("[data-toast]"), toastT; var toast = function (m) { if (!toastEl) return; toastEl.textContent = m; toastEl.hidden = false; requestAnimationFrame(function () { toastEl.classList.add("is-on"); }); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove("is-on"); }, 2600); };
+    var links = function () { return ta.value.split(/\n/).map(function (x) { return x.trim(); }).filter(Boolean).slice(0, 20); };
+    var sync = function () { var n = links().length; $("[data-dl-count]").textContent = n + " / 20 links"; go.disabled = !n; };
+    ta.addEventListener("input", sync);
+    go.addEventListener("click", function () {
+      var L = links(), list = $("[data-dl-list]");
+      L.forEach(function (u) { var li = document.createElement("li"), a = document.createElement("span"), b = document.createElement("em"); a.textContent = u; b.textContent = "Saved (demo)"; li.appendChild(a); li.appendChild(b); list.insertBefore(li, list.firstChild); });
+      total += L.length; $("[data-dl-total]").textContent = total; list.hidden = false; $("[data-dl-empty]").hidden = true; ta.value = ""; sync();
+      toast(L.length + " link" + (L.length > 1 ? "s" : "") + " added. Nothing is downloaded in this demo.");
+    });
+    sync();
+  });
+  </script>
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

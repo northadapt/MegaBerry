@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MegaBerry — Consistent AI talent, produced at scale</title>
+  <meta name="description" content="MegaBerry locks an identity and holds it across every image and video, so the same AI talent appears in every shot. Built for studios, agencies and operators.">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <style>
+    /* Hero grid */
+    .hero--grid { position: relative; min-height: 100vh; display: flex; align-items: flex-end; padding-bottom: 5rem; overflow: hidden; }
+    .hero--grid .hero__media { position: absolute; inset: 0; z-index: 0; }
+    .hero--grid .hero__tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; height: 100%; }
+    .hero--grid .hero__tile { border-radius: 6px; min-height: 0; }
+    .hero--grid::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(12,10,16,0) 0%, rgba(12,10,16,0.4) 30%, rgba(12,10,16,0.85) 60%, rgba(12,10,16,1) 80%); }
+    .hero__jumbo { font-size: clamp(2.8rem, 6vw, 5.5rem); letter-spacing: -0.04em; line-height: 0.95; max-width: 14ch; margin: 0; }
+    .hero__prompt { display: flex; align-items: center; max-width: 32rem; margin-top: 1.25rem; padding: 4px; border: 1px solid rgba(155,123,234,0.35); border-radius: var(--r-pill); background: rgba(20,17,27,0.72); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 0 0 4px rgba(155,123,234,0.06), 0 12px 40px rgba(0,0,0,0.45); transition: border-color 0.18s, box-shadow 0.18s; }
+    .hero__prompt:hover, .hero__prompt:focus-within { border-color: rgba(155,123,234,0.7); box-shadow: 0 0 0 4px rgba(155,123,234,0.14), 0 12px 40px rgba(0,0,0,0.45); }
+    .hero__prompt input { flex: 1; min-width: 0; border: 0; padding: 0.7rem 0.6rem 0.7rem 1.1rem; background: transparent; color: var(--text-strong); font: inherit; font-size: 0.95rem; outline: none; }
+    .hero__prompt input::placeholder { color: var(--text-muted); }
+    .hero__prompt-btn { flex: none; width: 42px; height: 42px; display: grid; place-items: center; background: var(--accent-fill, #7f56d9); border: 0; border-radius: 50%; cursor: pointer; color: #fff; transition: background 0.15s, transform 0.15s; }
+    .hero__made { display: inline-flex; align-items: center; gap: 0.45rem; margin: 0.9rem 0 0; color: var(--text-muted); font-size: 0.82rem; }
+    .hero__made svg { flex: none; color: var(--accent); }
+    .hero__made b { color: var(--text-strong); font-weight: 600; }
+    .hero__prompt-btn:hover { background: #8e68e6; transform: translateX(1px); }
+    .chip { display: inline-flex; align-items: center; justify-content: center; padding: 0.4rem 0.85rem; border: 1px solid var(--line-strong); border-radius: var(--r-pill); font-size: 0.82rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.15s; text-transform: none; letter-spacing: 0; }
+    .chip:hover { border-color: var(--accent); color: var(--text-strong); }
+    /* 5-col grid */
+    .grid--5 { grid-template-columns: repeat(5, 1fr); }
+    /* Scroll row */
+    .scroll-row { display: flex; gap: 0.75rem; animation: scroll-auto 60s linear infinite; width: max-content; }
+    .scroll-row:hover { animation-play-state: paused; }
+    .scroll-row-wrap { position: relative; overflow: hidden; margin-inline: calc(-50vw + 50%); width: 100vw; padding: 0; }
+    .scroll-row-wrap::before, .scroll-row-wrap::after { content: ""; position: absolute; top: 0; bottom: 0; width: 8rem; z-index: 2; pointer-events: none; }
+    .scroll-row-wrap::before { left: 0; background: linear-gradient(90deg, #0c0a10 0%, #0c0a10 10%, transparent 100%); }
+    .scroll-row-wrap::after { right: 0; background: linear-gradient(270deg, #0c0a10 0%, #0c0a10 10%, transparent 100%); }
+    @keyframes scroll-auto { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .section--no-line { border-top: 0 !important; }
+    .scroll-row .frame--9x16 { flex: none; width: 16rem; border-radius: var(--r-lg); }
+    /* 9:16 frames */
+    .frame--9x16 { aspect-ratio: 9/16; }
+    .frame--1x1 { aspect-ratio: 1/1; }
+    /* How it works reworked */
+    .hiw { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .hiw__card { padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-raised); text-align: center; }
+    .hiw__num { display: inline-grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: rgba(155,123,234,0.1); color: var(--accent); font-size: 1rem; font-weight: 800; margin-bottom: 1rem; }
+    .hiw__card h3 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+    .hiw__card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+    @media (max-width: 640px) { .hiw { grid-template-columns: 1fr; } .grid--5 { grid-template-columns: repeat(3, 1fr); } }
+  </style>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+
+    <!-- Hero — photo grid background -->
+    <section class="hero hero--grid">
+      <div class="hero__media">
+        <div class="hero__tiles">
+          <div class="hero__tile" style="background:linear-gradient(135deg,#1a1225,#2d1f3d)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#1f1a2e,#352848)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#251d35,#3d2f55)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#1e1830,#2a1e3e)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#22192f,#342649)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#1c1628,#2f2244)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#201a30,#382a4f)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#1a1425,#2b1e3c)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#241c34,#3a2c50)"></div>
+          <div class="hero__tile" style="background:linear-gradient(135deg,#1e1630,#312346)"></div>
+        </div>
+      </div>
+      <div class="container" style="position:relative;z-index:2">
+        <div class="hero__copy" style="max-width:none">
+          <h1 class="hero__jumbo">Hollywood-grade<br>scroll stoppers.</h1>
+          <p class="lede" style="max-width:42rem">The platform for consistent AI talent. Create content that looks like a production team made it.</p>
+          <form class="hero__prompt" action="signup.html" onsubmit="event.preventDefault();location.href='signup.html'">
+            <input type="text" placeholder="a cinematic noir scene, rain, neon, slow push-in..." aria-label="Describe what you want to create" maxlength="300" autocomplete="off">
+            <button class="hero__prompt-btn" type="submit" aria-label="Generate"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12h14M12 5l7 7-7 7"/></svg></button>
+          </form>
+          <p class="hero__made"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.3 6.2 6.2 2.3-6.2 2.3-2.3 6.2-2.3-6.2-6.2-2.3 6.2-2.3z"/></svg><span>Everything on this page was made in <b>MegaBerry</b>.</span></p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Stats -->
+    <div style="border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+      <div class="container mb-stats" style="display:grid;grid-template-columns:repeat(3,1fr)">
+        <div style="padding:1.5rem 0;text-align:center;border-right:1px solid var(--line)">
+          <div style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--text-strong);letter-spacing:-0.03em;line-height:1">106M+</div>
+          <div style="font-size:0.78rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;margin-top:0.3rem">Generations</div>
+        </div>
+        <div style="padding:1.5rem 0;text-align:center;border-right:1px solid var(--line)">
+          <div style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--text-strong);letter-spacing:-0.03em;line-height:1">14B+</div>
+          <div style="font-size:0.78rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;margin-top:0.3rem">Views on MegaBerry content</div>
+        </div>
+        <div style="padding:1.5rem 0;text-align:center">
+          <div style="font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--text-strong);letter-spacing:-0.03em;line-height:1">27,000+</div>
+          <div style="font-size:0.78rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;margin-top:0.3rem">Creators</div>
+        </div>
+      </div>
+    </div>
+    <!-- Consistency at scale -->
+    <section class="section section--no-line">
+      <div class="container">
+        <div class="section__head" id="showroom">
+          <p class="eyebrow">PRODUCTION · <strong>BUILT FOR VOLUME</strong></p>
+          <h2 style="font-size:var(--fs-hero)">Consistency at scale.</h2>
+          <p class="lede" style="max-width:46rem">Same person. Endless output. Spin up a whole content calendar in an afternoon. Built for operators, not just one-off prompts.</p>
+        </div>
+        <div class="scroll-row-wrap"><div class="scroll-row">
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <!-- duplicate for seamless loop -->
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+          <div class="frame frame--9x16"><span class="frame__play"></span></div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- Customization and control -->
+    <section class="section section--line">
+      <div class="container mb-split" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center">
+        <div>
+          <p class="eyebrow">AVATARS · <strong>IDENTITY LOCK</strong></p>
+          <h2 style="font-size:var(--fs-3xl);margin:0.75rem 0">Customization and control.</h2>
+          <p class="lede" style="max-width:none">MegaBerry locks your identity and bends everything else around it, while still maintaining facial and body likeness. You can control the hair, eyes, expression, outfit, pose, props, style — just like directing a real person.</p>
+
+          <div style="margin-top:1.5rem"><a class="gk-btn gk-btn--solid gk-btn--lg" href="signup.html">Train Your Avatar →</a></div>
+        </div>
+        <div class="grid grid--3 mb-keep3" style="--gap:0.4rem">
+          <div class="frame frame--1x1"><span class="frame__tag">Base</span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Blonde</span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Ginger</span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Bald</span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Curly</span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Ponytail</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section section--line section--raised">
+      <div class="container">
+        <div class="section__head section__head--center">
+          <p class="eyebrow eyebrow--center">CREATE · <strong>HOW IT WORKS</strong></p>
+          <h2 style="font-size:var(--fs-hero)">Three steps to content.</h2>
+          <p class="lede">From avatar to finished asset in minutes. Here's how it works.</p>
+        </div>
+        <div class="hiw">
+          <div class="hiw__card">
+            <div class="hiw__num">1</div>
+            <h3>Train your avatar</h3>
+            <p>Upload reference photos and train an identity-locked avatar. Your likeness is saved once and reused across every generation.</p>
+          </div>
+          <div class="hiw__card">
+            <div class="hiw__num">2</div>
+            <h3>Prompt and direct</h3>
+            <p>Write a prompt or pick from styles. Change hair, outfit, pose, expression and setting — the face and body stay locked.</p>
+          </div>
+          <div class="hiw__card">
+            <div class="hiw__num">3</div>
+            <h3>Export and publish</h3>
+            <p>Generate singles or run bulk batches. Queue by priority, export finished assets, and publish across every channel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Advanced creations -->
+    <section class="section section--line">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">CREATE · <strong>THE DEEP END</strong></p>
+          <h2 style="font-size:var(--fs-hero)">Advanced creations.</h2>
+          <p class="lede" style="max-width:48rem">Ready to go further? Multi-shot films, music videos, broadcasts, choreography — complicated builds, every format, all with the same consistent character. Click any to expand.</p>
+        </div>
+        <div class="grid grid--5" style="--gap:0.5rem">
+          <div class="frame frame--1x1"><span class="frame__tag">Action</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">E-commerce</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Show</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Podcast</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Drama</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Scene</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Trailer</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Film</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Music Video</span><span class="frame__play"></span></div>
+          <div class="frame frame--1x1"><span class="frame__tag">Broadcast</span><span class="frame__play"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust & safety -->
+    <section class="section section--line section--raised">
+      <div class="container mb-split" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+        <div>
+          <p class="eyebrow">TRUST · <strong>SAFETY</strong></p>
+          <h2 style="font-size:var(--fs-3xl);margin:0.75rem 0">Your content. Your rules.</h2>
+          <p class="lede" style="max-width:none">We take identity seriously. Every avatar is verified, every output is yours, and content standards are enforced from day one.</p>
+          <div style="margin-top:1.5rem"><a class="gk-btn gk-btn--solid" href="trust.html">Read the trust &amp; safety overview</a></div>
+        </div>
+        <div style="display:grid;gap:0.5rem">
+          <div style="padding:1rem 1.25rem;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-raised)">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem">
+              <strong style="font-size:0.95rem">Verified identity</strong>
+            </div>
+            <p style="margin:0;font-size:0.85rem;color:var(--text-muted);line-height:1.5">Creators verify their identity before training an avatar. Unverified likenesses are blocked from public use.</p>
+          </div>
+          <div style="padding:1rem 1.25rem;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-raised)">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem">
+              <strong style="font-size:0.95rem">You own your output</strong>
+            </div>
+            <p style="margin:0;font-size:0.85rem;color:var(--text-muted);line-height:1.5">Content you generate is yours to use commercially. MegaBerry retains no ownership of user-generated content.</p>
+          </div>
+          <div style="padding:1rem 1.25rem;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-raised)">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem">
+              <strong style="font-size:0.95rem">Strict content standards</strong>
+            </div>
+            <p style="margin:0;font-size:0.85rem;color:var(--text-muted);line-height:1.5">Celebrity likeness without consent is prohibited. Violence, deception and illegal content are removed. Accounts are suspended.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section section--line">
+      <div class="container">
+        <div class="section__head section__head--center">
+          <p class="eyebrow eyebrow--center">PRICING</p>
+          <h2>Simple, transparent pricing.</h2>
+          <p class="lede">Start free and scale as you grow. No hidden fees, no surprises.</p>
+        </div>
+        <div class="plans">
+          <div class="plan">
+            <div class="plan__top"><span class="plan__name">Free</span></div>
+            <p class="plan__desc">Explore the studio and pay as you create.</p>
+            <p class="plan__price">$0<small>/ month</small></p>
+            <div class="plan__note"><button class="note" type="button" aria-describedby="note-free">Full access <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button><span class="note__tip" role="tooltip" id="note-free">Full access to all tools and features. Generations are pay-as-you-go with standard queue priority. Upgrade for unlimited Apex images and faster processing. Apex Video Motion is unlimited on Pro and Max; other videos use credits.</span></div>
+            <ul class="plan__list"><li>Pay-as-you-go generations</li><li>Access core workflows</li><li>Create and export assets</li></ul>
+            <a class="gk-btn gk-btn--block" href="studio.html">Start free</a>
+          </div>
+          <div class="plan">
+            <div class="plan__top"><span class="plan__name">Pro</span></div>
+            <p class="plan__desc">For creators posting every week.</p>
+            <p class="plan__price">$50<small>/ month</small></p>
+            <div class="plan__note"><button class="note" type="button" aria-describedby="note-pro">Unlimited Apex images <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button><span class="note__tip" role="tooltip" id="note-pro">Generate Apex images without limits at higher priority speed. Apex Video Motion is unlimited on Pro and Max; other videos use credits. Fair-use policies apply to maintain quality service for all users. Speed may adjust during peak demand.</span></div>
+            <ul class="plan__list"><li>Unlimited Apex images and Apex Video Motion</li><li>Other videos use credits</li><li>Higher queue priority</li><li>Larger bulk batches</li><li>Early access to new workflows</li></ul>
+            <a class="gk-btn gk-btn--block" href="studio.html">Get Pro</a>
+          </div>
+          <div class="plan plan--featured">
+            <div class="plan__top"><span class="plan__name">Max</span><span class="badge">Best value</span></div>
+            <p class="plan__desc">For agencies, teams and power users.</p>
+            <p class="plan__price">$200<small>/ month</small></p>
+            <div class="plan__note"><button class="note" type="button" aria-describedby="note-max">Unlimited Apex images <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button><span class="note__tip" role="tooltip" id="note-max">Generate Apex images without limits at our fastest priority speed. Apex Video Motion is unlimited on Pro and Max; other videos use credits. Fair-use policies apply to maintain quality service for all users. Max tier always gets top queue priority.</span></div>
+            <ul class="plan__list"><li>Everything in Pro</li><li>Fastest generation priority</li><li>Largest bulk batches</li><li>Advanced avatar and video features</li><li>Train your own avatar</li></ul>
+            <a class="gk-btn gk-btn--solid gk-btn--block" href="studio.html">Get Max</a>
+          </div>
+        </div>
+        <p class="hero__caption center" style="margin-top:1.5rem"><a class="link-arrow" href="pricing.html">Compare every feature</a></p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--line">
+      <div class="container split split--top">
+        <div class="stack" style="--stack:1.25rem">
+          <p class="eyebrow">FAQ</p>
+          <h2 style="font-size:var(--fs-3xl)">Frequently asked questions.</h2>
+          <p class="lede">Everything you need to know about avatar-first creation in Studio.</p>
+          <a class="link-arrow" href="faq.html">All questions</a>
+        </div>
+        <div class="faq">
+          <details class="faq__item"><summary>What makes MegaBerry different from other AI generators?</summary><div class="faq__a"><p>MegaBerry locks identity first. Facial and body likeness stay fixed while you control hair, eyes, expression, outfit, pose, props and style, so your character does not mutate from shot to shot.</p></div></details>
+          <details class="faq__item"><summary>Can I create with a real person or celebrity likeness?</summary><div class="faq__a"><p>No. Creating content using another person's likeness without their consent is prohibited under MegaBerry's Acceptable Use Policy. Only verified avatar owners can generate content with their trained identity.</p></div></details>
+          <details class="faq__item"><summary>Can I use generated content commercially?</summary><div class="faq__a"><p>Yes. You own the content you generate with your avatar and may use it commercially, subject to the Terms of Service and Acceptable Use Policy.</p></div></details>
+          <details class="faq__item"><summary>Does MegaBerry support bulk creation?</summary><div class="faq__a"><p>Yes. Bulk actions let you run many generations at once, and batch size grows with your plan: standard on Free, 10x larger on Pro and 50x larger on Max.</p></div></details>
+          <details class="faq__item"><summary>What's the difference between Pro and Max?</summary><div class="faq__a"><p>Max adds the fastest generation priority, the largest bulk batches, advanced avatar and video features, and the ability to train your own avatar.</p></div></details>
+          <details class="faq__item"><summary>Can I cancel anytime?</summary><div class="faq__a"><p>Yes. You can cancel your subscription at any time. Your plan stays active until the end of the current billing period and you will not be charged again.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="section section--line">
+      <div class="container">
+        <div class="cta">
+          <h2>Ready to build with your avatar?</h2>
+          <p>Start from the studio, chain the right workflow, and move from idea to publishable asset faster.</p>
+          <div class="actions"><a class="gk-btn gk-btn--solid gk-btn--lg" href="studio.html">Start Creating →</a><a class="gk-btn gk-btn--lg" href="contact.html">Talk to Sales</a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

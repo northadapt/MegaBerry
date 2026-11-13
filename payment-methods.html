@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment Methods | MegaBerry</title>
+  <meta name="description" content="Manage your saved payment cards for subscriptions and purchases.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="app" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="app__content app__content--wide">
+
+        <a class="pm-back" href="settings.html#billing"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Back to Billing</a>
+
+        <div class="pm-head">
+          <div>
+            <h1>Payment Methods</h1>
+            <p>Manage your saved payment cards for subscriptions and purchases.</p>
+          </div>
+        </div>
+
+        <!-- Saved cards -->
+        <section class="set-card pm-section">
+          <header>
+            <div class="pm-card-head">
+              <div class="pm-card-head__left">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                <div>
+                  <h2>Saved Cards</h2>
+                  <p>Your saved payment methods are securely encrypted.</p>
+                </div>
+              </div>
+              <button class="gk-btn gk-btn--solid" type="button" data-pm-add><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>Add Card</button>
+            </div>
+          </header>
+          <div class="pm-cards" data-pm-list>
+            <!-- card row -->
+            <div class="pm-card-row">
+              <div class="pm-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+              <div class="pm-card-info">
+                <div class="pm-card-info__top">
+                  <strong>Visa **** 1958</strong>
+                  <span class="schip schip--ok">Default</span>
+                </div>
+                <small>Expires 10/30 &middot; Harry Hoyle</small>
+              </div>
+              <button class="icon-btn pm-card-del" type="button" aria-label="Remove card"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M10 7V4.5h4V7M7 7l.8 12h8.4L17 7"/></svg></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Security note -->
+        <div class="pm-secure">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="3"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>
+          <div>
+            <strong>Your payment information is secure</strong>
+            <p>Card details are encrypted with AES-256 and stored securely.</p>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

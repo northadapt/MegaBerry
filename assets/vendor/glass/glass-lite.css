@@ -1,0 +1,152 @@
+/* glass-lite.css: the pieces of glass-kit that MegaBerry uses (tokens, ambient glow, buttons, glass surfaces).
+ * Copied from glass-kit v1 (ashitdomain.com), owned by the site owner.
+ * Only classes prefixed gk- and --gk- variables, so nothing here touches the rest of the site.
+ * MegaBerry's own overrides are at the bottom of this file. */
+
+:root{
+  --gk-bg:#08080a;
+  --gk-ink:#ffffff;          /* main text */
+  --gk-ink-2:#c9c9d0;        /* secondary text */
+  --gk-ink-3:#a9a9b3;        /* quiet text, nav links */
+  --gk-muted:#8a8a90;        /* captions */
+  --gk-font:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --gk-ease:cubic-bezier(.2,.8,.2,1);
+
+  --gk-w:255,255,255;        /* colour of highlights and edges (white on dark themes, black on light) */
+  --gk-glass:rgba(18,18,22,.68);           /* tint behind the blur */
+  --gk-glass-edge:rgba(var(--gk-w),.09);   /* 1px border */
+  --gk-shine:rgba(var(--gk-w),.22);        /* top-edge highlight */
+  --gk-blur:24px;
+  --gk-saturate:190%;
+
+  --gk-accent:#ffffff;       /* primary button, active states */
+  --gk-accent-ink:#08080a;   /* text on the accent colour */
+  --gk-ok:#7ae0a0; --gk-warn:#ffd36b; --gk-bad:#ff7a8a; --gk-info:#7ab8ff;
+
+  --gk-shadow-sm:0 2px 10px rgba(0,0,0,.35);
+  --gk-shadow-md:0 12px 34px rgba(0,0,0,.5);
+  --gk-shadow-lg:0 18px 50px rgba(0,0,0,.6);
+
+  /* shape: corner roundness. Change with data-shape="sharp|soft|round" or override these */
+  --gk-r-xl:32px;--gk-r-lg:28px;--gk-r-md:22px;--gk-r-sm:14px;--gk-r-xs:7px;--gk-r-pill:999px;
+
+  /* background glow colours (the 3 drifting orbs) */
+  --gk-orb-1:#4a4f66; --gk-orb-2:#3a4a52; --gk-orb-3:#40383f; --gk-orb-o:.55;
+}
+
+
+/* ---------- ambient glow + grain ---------- */
+.gk-ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.gk-orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:var(--gk-orb-o);will-change:transform}
+.gk-orb.a{width:46vmax;height:46vmax;left:-12vmax;top:-22vmax;background:radial-gradient(circle,var(--gk-orb-1) 0%,transparent 65%);animation:gk-drift-a 24s ease-in-out infinite alternate}
+.gk-orb.b{width:40vmax;height:40vmax;right:-14vmax;top:-8vmax;background:radial-gradient(circle,var(--gk-orb-2) 0%,transparent 65%);animation:gk-drift-b 28s ease-in-out infinite alternate}
+.gk-orb.c{width:36vmax;height:36vmax;left:30vw;bottom:-26vmax;opacity:.4;background:radial-gradient(circle,var(--gk-orb-3) 0%,transparent 65%);animation:gk-drift-a 32s ease-in-out infinite alternate-reverse}
+@keyframes gk-drift-a{to{transform:translate3d(8vmax,5vmax,0) scale(1.1)}}
+@keyframes gk-drift-b{to{transform:translate3d(-9vmax,7vmax,0) scale(1.15)}}
+
+/* ---------- button (base; more kinds in the buttons part) ---------- */
+.gk-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 22px;border-radius:var(--gk-r-pill);
+  font:600 14px/1 var(--gk-font);color:var(--gk-ink);text-decoration:none;white-space:nowrap;cursor:pointer;
+  background:linear-gradient(180deg,rgba(var(--gk-w),.2),rgba(var(--gk-w),.06));
+  border:1px solid rgba(var(--gk-w),.16);
+  box-shadow:inset 0 1px 0 rgba(var(--gk-w),.4),var(--gk-shadow-sm);
+  transition:background .25s ease,transform .25s var(--gk-ease),box-shadow .25s ease,color .25s ease,border-color .25s ease;
+}
+.gk-btn:hover{background:linear-gradient(180deg,rgba(var(--gk-w),.3),rgba(var(--gk-w),.11));transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(var(--gk-w),.5),0 6px 18px rgba(0,0,0,.45)}
+.gk-btn:active{transform:none}
+
+
+/* ===== button kinds, sizes, groups, switch ===== */
+
+.gk-btn--solid{color:var(--gk-accent-ink);background:var(--gk-accent);border-color:var(--gk-accent);box-shadow:0 6px 22px rgba(var(--gk-w),.12)}
+.gk-btn--solid:hover{background:var(--gk-accent);filter:brightness(.92);box-shadow:0 8px 26px rgba(var(--gk-w),.18)}
+.gk-btn--ghost{background:transparent;border-color:transparent;box-shadow:none;color:var(--gk-ink-2)}
+.gk-btn--ghost:hover{color:var(--gk-ink);background:rgba(var(--gk-w),.08);box-shadow:none}
+.gk-btn--outline{background:transparent;box-shadow:none;border-color:rgba(var(--gk-w),.3)}
+.gk-btn--outline:hover{background:rgba(var(--gk-w),.08);box-shadow:none;border-color:rgba(var(--gk-w),.5)}
+.gk-btn--danger{color:#fff;background:linear-gradient(180deg,#ff6b7d,#d9344a);border-color:rgba(255,255,255,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 20px rgba(217,52,74,.35)}
+.gk-btn--danger:hover{background:linear-gradient(180deg,#ff8190,#e63e55)}
+.gk-btn--success{color:#052412;background:linear-gradient(180deg,#9af0b8,#4cc57d);border-color:rgba(255,255,255,.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 6px 20px rgba(76,197,125,.3)}
+.gk-btn--success:hover{background:linear-gradient(180deg,#aef5c6,#58d088)}
+.gk-btn--sm{height:34px;padding:0 16px;font-size:13px}
+.gk-btn--lg{height:52px;padding:0 32px;font-size:16px}
+.gk-btn--block{display:flex;width:100%}
+.gk-btn--icon{width:42px;padding:0}
+.gk-btn--icon.gk-btn--sm{width:34px}
+.gk-btn--icon.gk-btn--lg{width:52px}
+.gk-btn--square{border-radius:var(--gk-r-sm)}
+.gk-btn svg{width:18px;height:18px;flex:none}
+.gk-btn[aria-pressed="true"]{color:var(--gk-accent-ink);background:var(--gk-accent);border-color:var(--gk-accent)}
+.gk-btn:disabled,.gk-btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed;transform:none;pointer-events:none}
+.gk-btn.is-loading{position:relative;color:transparent!important;pointer-events:none}
+.gk-btn.is-loading::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;border:2px solid var(--gk-ink);border-right-color:transparent;animation:gk-spin .7s linear infinite}
+.gk-btn--solid.is-loading::after{border-color:var(--gk-accent-ink);border-right-color:transparent}
+@keyframes gk-spin{to{transform:rotate(360deg)}}
+.gk-link{color:var(--gk-ink);text-decoration:underline;text-decoration-color:rgba(var(--gk-w),.4);text-underline-offset:3px;transition:text-decoration-color .2s ease}
+.gk-link:hover{text-decoration-color:var(--gk-ink)}
+
+/* joined buttons */
+.gk-btn-group{display:inline-flex}
+.gk-btn-group .gk-btn{border-radius:0;transform:none}
+.gk-btn-group .gk-btn:first-child{border-radius:var(--gk-r-pill) 0 0 var(--gk-r-pill)}
+.gk-btn-group .gk-btn:last-child{border-radius:0 var(--gk-r-pill) var(--gk-r-pill) 0}
+.gk-btn-group .gk-btn+.gk-btn{margin-left:-1px}
+
+/* on / off switch */
+.gk-switch{display:inline-flex;align-items:center;gap:12px;cursor:pointer;font-size:14px;font-weight:600;color:var(--gk-ink-2)}
+.gk-switch input{position:absolute;opacity:0;width:1px;height:1px}
+.gk-switch__track{position:relative;flex:none;width:48px;height:28px;border-radius:var(--gk-r-pill);background:rgba(var(--gk-w),.1);border:1px solid var(--gk-glass-edge);box-shadow:inset 0 1px 3px rgba(0,0,0,.35);transition:background .25s ease,border-color .25s ease}
+.gk-switch__track::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--gk-ink);box-shadow:0 2px 6px rgba(0,0,0,.4);transition:transform .3s var(--gk-ease)}
+.gk-switch input:checked+.gk-switch__track{background:var(--gk-accent);border-color:var(--gk-accent)}
+.gk-switch input:checked+.gk-switch__track::after{transform:translateX(20px);background:var(--gk-accent-ink)}
+.gk-switch input:focus-visible+.gk-switch__track{outline:2px solid rgba(var(--gk-w),.85);outline-offset:3px}
+.gk-switch input:disabled+.gk-switch__track{opacity:.45}
+
+/* ---------- glass surfaces: card + panel ---------- */
+.gk-cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
+.gk-card,.gk-glass{
+  position:relative;overflow:hidden;border-radius:var(--gk-r-lg);padding:24px;color:inherit;text-decoration:none;
+  background:linear-gradient(135deg,rgba(var(--gk-w),.14) 0%,rgba(var(--gk-w),0) 45%,rgba(var(--gk-w),.07) 100%),var(--gk-glass);
+  -webkit-backdrop-filter:blur(var(--gk-blur)) saturate(var(--gk-saturate));backdrop-filter:blur(var(--gk-blur)) saturate(var(--gk-saturate));
+  border:1px solid var(--gk-glass-edge);
+  box-shadow:inset 0 1px 0 var(--gk-shine),var(--gk-shadow-md);
+}
+.gk-card{display:flex;flex-direction:column;justify-content:space-between;min-height:190px;transition:transform .35s var(--gk-ease),border-color .3s ease}
+.gk-card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s ease;background:radial-gradient(260px circle at var(--x,50%) var(--y,50%),rgba(var(--gk-w),.10),transparent 65%)}
+a.gk-card:hover{transform:translateY(-3px);border-color:rgba(var(--gk-w),.22)}
+a.gk-card:hover::after{opacity:1}
+.gk-card > *{position:relative}
+.gk-card h3{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.gk-card p{font-size:14px;color:var(--gk-muted);line-height:1.5}
+.gk-tag,.gk-badge{align-self:flex-start;justify-self:start;display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:var(--gk-r-pill);color:var(--gk-ink-2);background:rgba(var(--gk-w),.07);border:1px solid rgba(var(--gk-w),.1)}
+
+
+/* ===== MegaBerry overrides ===== */
+:root {
+  --gk-font: var(--font-sans);
+  --gk-bg: var(--bg);
+  --gk-glass: rgba(20, 17, 27, 0.7);
+  --gk-accent: #7f56d9;
+  --gk-accent-ink: #ffffff;
+  --gk-orb-1: #5a37b8; --gk-orb-2: #8a3a9a; --gk-orb-3: #2f4a9a; --gk-orb-o: 0.38;
+}
+/* ambient glow sits behind everything (negative layer; the page background paints below it) */
+.gk-ambient { z-index: -1; }
+/* calmer buttons: flat fills, hairline borders, no gloss or glow */
+.gk-btn {
+  background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.14); box-shadow: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.gk-btn:hover { background: rgba(255, 255, 255, 0.09); border-color: rgba(255, 255, 255, 0.24); transform: none; box-shadow: none; }
+.gk-btn--solid {
+  color: #fff; background: var(--gk-accent); border-color: var(--gk-accent); box-shadow: none;
+}
+.gk-btn--solid:hover {
+  background: #6e45c8; border-color: #6e45c8; filter: none; transform: none; box-shadow: none;
+}
+.gk-btn { height: auto; min-height: 42px; }
+.gk-btn--lg { min-height: 52px; }
+.gk-btn .gk-arrow { transition: transform 0.25s var(--gk-ease); }
+.gk-btn:hover .gk-arrow { transform: translateX(3px); }
+.gk-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

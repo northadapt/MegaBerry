@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Design tokens — the only place raw colours, sizes and fonts are defined.
+   Change a value here and it changes across the whole site.
+   The site is dark only (<html data-theme="dark">).
+   ========================================================================== */
+
+:root {
+  /* Type */
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
+  --fs-3xl: clamp(2.125rem, 1.5rem + 2.8vw, 3.5rem);
+  --fs-hero: clamp(2.5rem, 1.5rem + 4.6vw, 5rem);
+
+  /* Space */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 7rem;
+
+  /* Shape + layout */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+  --maxw: 1200px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --header-h: 64px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Dark only. */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0c0a10;
+  --bg-raised: #14111b;
+  --bg-sunken: #09070c;
+  --bg-hover: #1c1825;
+  --line: rgba(238, 232, 244, 0.12);
+  --line-strong: rgba(238, 232, 244, 0.26);
+  --text: #f2edf5;
+  --text-muted: #aaa2b5;
+  --text-faint: #8b8397;
+  /* Brand purple, sampled from the MegaBerry logo (#7f56d9 / #53389e). */
+  --accent: #9b7bea;        /* text / icons on dark (tinted for 4.5:1+ contrast) */
+  --accent-fill: #7f56d9;   /* button + bar fills (white text = 4.9:1) */
+  --accent-fill-hover: #6e45c8;
+  --on-accent: #ffffff;
+  --ok: #62d6a4;
+  --warn: #f0b35a;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  /* Section accent hues: one per section label / stat so the page reads in colour-coded chapters. */
+  --hue-violet: #9b7bea;
+  --hue-blue: #7ea2ff;
+  --hue-teal: #4fd1c0;
+  --hue-coral: #ff8a6b;
+  --hue-pink: #f08ac4;
+  /* App-shell helpers (light mode overrides them below). */
+  --ov: 255, 255, 255;
+  --text-strong: #ffffff;
+  --shell-bg: #09080c;
+  --side-bg: #0b0a10;
+  --menu-bg: #0a090e;
+  --danger: #f0707a;
+  --pending: #e5b04a;
+}
+
+/* Inverse surface: a light card on the dark page.
+   It re-declares the neutral tokens so everything inside just works. */
+:root[data-theme="dark"] .inverse {
+  --bg: #f6f2ee; --bg-raised: #ffffff; --bg-sunken: #ece6e0; --bg-hover: #f0e9e3;
+  --line: rgba(23, 18, 28, 0.14); --line-strong: rgba(23, 18, 28, 0.32);
+  --text: #17121c; --text-muted: #585061; --text-faint: #6b6376;
+  --accent: #53389e; --accent-fill: #53389e; --accent-fill-hover: #432c85;
+}
+
+/* Light mode: signed-in app pages only (body[data-shell="app"]). Signed-out and marketing pages stay dark. */
+body[data-shell="app"][data-mode="light"] {
+  color-scheme: light;
+  --bg: #f5f3f9; --bg-raised: #ffffff; --bg-sunken: #ece8f2; --bg-hover: #f0ecf6;
+  --line: rgba(23, 18, 28, 0.12); --line-strong: rgba(23, 18, 28, 0.26);
+  --text: #1b1522; --text-muted: #5b5366; --text-faint: #70687c;
+  --accent: #6c47c9; --accent-fill: #7f56d9; --accent-fill-hover: #6e45c8; --on-accent: #ffffff;
+  --ok: #1d8a60; --warn: #a96a16;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 20px 50px -26px rgba(40, 24, 80, 0.25);
+  --ov: 23, 18, 28;
+  --text-strong: #17121c;
+  --shell-bg: #f5f3f9; --side-bg: #ffffff; --menu-bg: #ffffff;
+  --danger: #cf3b49; --pending: #a96a16;
+  /* glass-kit buttons: dark ink, dark edges */
+  --gk-w: 23, 18, 28; --gk-ink: #17121c; --gk-ink-2: #4a4254; --gk-ink-3: #5b5366; --gk-muted: #70687c;
+}

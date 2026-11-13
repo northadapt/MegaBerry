@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- START HERE for any new page.
+     1. Copy this file to e.g. about.html
+     2. Change <title>, the description, and data-page (must match a nav key in assets/js/layout.js to highlight the nav link)
+     3. Add the page to NAV or FOOTER in assets/js/layout.js if it should be linked, and to sitemap.xml
+     4. Build the body from the components in assets/css/components.css (see README "Components")
+     Pages in a sub-folder: set data-root="../" on <body> and prefix asset paths with ../ -->
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page title | MegaBerry</title>
+  <meta name="description" content="One sentence describing the page for search results.">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="template">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <div class="stack">
+          <p class="eyebrow"><strong>●</strong> Section label</p>
+          <h1>Page headline.</h1>
+          <p class="lede">One or two sentences that say what this page is for.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow"><strong>01</strong> Label</p>
+          <h2>Section heading.</h2>
+        </div>
+        <div class="grid grid--3">
+          <div class="feature"><span class="feature__n">TAG</span><h3>Feature</h3><p>Description.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

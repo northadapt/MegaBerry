@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact sales | MegaBerry</title>
+  <meta name="description" content="Talk to MegaBerry about custom avatars, tools or plans for your team or agency.">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <div class="stack">
+          <p class="eyebrow"><strong>●</strong> Contact sales</p>
+          <h1>Need a custom avatar, tool or plan?</h1>
+          <p class="lede">Make custom requests with a dedicated representative. Tell us what you are building and we will come back with a plan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:1rem">
+      <div class="container split split--top">
+        <form class="form card" data-contact-form novalidate>
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="company">Company</label><input id="company" name="company" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="need">What do you need?</label>
+            <select id="need" name="need" required>
+              <option value="">Choose one</option>
+              <option>Custom avatar</option>
+              <option>Custom tool or workflow</option>
+              <option>Custom plan or enterprise</option>
+              <option>Agency or team rollout</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field"><label for="message">Tell us more</label><textarea id="message" name="message"></textarea></div>
+          <button class="gk-btn gk-btn--solid gk-btn--lg" type="submit">Send enquiry</button>
+          <p class="ticket__hint" style="margin:0">You'll be asked to sign in or create an account to send this.</p>
+          <p class="form__status" role="status" data-form-status></p>
+        </form>
+
+        <div class="stack" style="--stack:1.5rem">
+          <div class="card"><h2 style="font-size:var(--fs-xl);margin-bottom:0.5rem">Already a customer?</h2><p class="muted">Check the <a href="faq.html">FAQ</a> first. Every plan includes the help center, with enhanced support on Pro and VIP on Max. Sign in to open a support ticket.</p><a class="gk-btn gk-btn--solid" href="support.html" style="margin-top:1.25rem">Go to support</a></div>
+          <div class="card"><h2 style="font-size:var(--fs-xl);margin-bottom:0.5rem">Questions about trust?</h2><p class="muted">Read how identity, ownership and content standards are handled on the <a href="trust.html">Trust &amp; safety</a> page.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

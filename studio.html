@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio | MegaBerry</title>
+  <meta name="description" content="Your MegaBerry studio.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="app" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="app__content app__content--wide">
+        <section class="hello__hero studio-hero">
+          <img class="hello__logo" src="assets/img/logo-mark.png" alt="" width="48" height="48">
+          <h1>Welcome back, <span data-user-name>Stephen</span></h1>
+          <p data-studio-linked>What are you making today?</p>
+          <p data-studio-nomodel hidden>Let's get your avatar set up.</p>
+        </section>
+        <div class="studio-welcome" data-studio-nomodel hidden>
+          <div class="studio-welcome__card sw2">
+            <span class="sw2__ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c.9-3.6 3.6-5.4 7.2-5.4s6.3 1.8 7.2 5.4"/></svg></span>
+            <div class="studio-welcome__txt">
+              <h2 class="studio-welcome__h">Set up your avatar</h2>
+              <p>Train your own or claim one, then make content that keeps the same face every time.</p>
+            </div>
+            <div class="sw2__acts">
+              <a class="gk-btn gk-btn--solid" href="#" data-avatar-open>Set Up Avatar<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </div>
+        <script>
+        (function(){
+        function c(){var L=document.querySelectorAll("[data-studio-linked]"),N=document.querySelectorAll("[data-studio-nomodel]"),rl=document.querySelector("[data-recent-linked]"),rn=document.querySelector("[data-recent-nomodel]");var m=document.body.getAttribute("data-dev-mode");if(!m){try{m=localStorage.getItem("mb.devmode")}catch(e){}}m=m||"linked";var linked=m==="linked";
+        [].forEach.call(L,function(x){x.hidden=!linked});[].forEach.call(N,function(x){x.hidden=linked});if(rl)rl.hidden=!linked;if(rn)rn.hidden=linked;}
+        new MutationObserver(c).observe(document.body,{attributes:true,attributeFilter:["data-dev-mode"]});c();
+        setTimeout(c,100);setTimeout(c,500);})();
+        </script>
+
+        <div class="home-tools">
+          <a class="home-tool" href="apex-video.html">
+            <h2>Apex Video</h2>
+            <p>Generate video with your locked avatar. Unlimited motion on Pro and Max.</p>
+            <span class="link-arrow">Create a video</span>
+          </a>
+          <a class="home-tool" href="apex-video.html">
+            <h2>Apex Edit</h2>
+            <p>Change hair, outfits, poses and lighting one at a time while the person stays the same.</p>
+            <span class="link-arrow">Edit an image</span>
+          </a>
+        </div>
+
+        <section class="home-block" aria-labelledby="home-recent">
+          <div class="home-block__head"><h2 id="home-recent">Recent creations</h2></div>
+          <div class="sup__empty" data-recent-nomodel hidden>
+            <h2>Nothing generated yet</h2>
+            <p>Set up your avatar, then pick a look to make your first image or video.</p>
+            <a class="gk-btn gk-btn--solid" href="#" data-avatar-open>Set up your avatar</a>
+          </div>
+          <div class="sup__empty" data-recent-linked>
+            <h2>No creations yet</h2>
+            <p>Generate some content and your most recent creations will show here.</p>
+            <a class="gk-btn gk-btn--solid" href="apex-video.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg>Create your first video</a>
+          </div>
+        </section>
+
+        <section class="home-block" aria-labelledby="home-help">
+          <div class="home-block__head"><h2 id="home-help">Need a hand?</h2></div>
+          <div class="home-help">
+            <a class="home-help__item" href="faq.html"><strong>Help centre</strong><span>Answers to common questions.</span></a>
+            <a class="home-help__item" href="support.html"><strong>Support tickets</strong><span>Open a ticket or check on an existing one.</span></a>
+            <button class="home-help__item home-help__item--btn" type="button" data-pc-open><strong>Plans and credits</strong><span>Compare plans or add credits.</span></button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="sdlg sdlg--sm" data-pc-dlg aria-labelledby="pc-title">
+    <div class="sdlg__head"><div><h2 id="pc-title">Plans and credits</h2><p>What would you like to do?</p></div><button class="icon-btn" type="button" data-pc-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="sdlg__body pc__opts">
+      <a class="pc__opt" href="settings-pricing.html"><span><strong>Look at plans</strong><small>Compare Free, Pro and Max and change your plan.</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></a>
+      <button class="pc__opt" type="button" data-pc-credits><span><strong>Buy credits</strong><small>Top up with a card or USDC.</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button>
+    </div>
+  </dialog>
+  <script>
+  document.addEventListener("click", function (e) {
+    var d = document.querySelector("[data-pc-dlg]"), t = e.target;
+    if (t.closest("[data-pc-open]")) { d.showModal(); return; }
+    if (t === d || t.closest("[data-pc-close]")) { d.close(); return; }
+    if (t.closest("[data-pc-credits]")) { d.close(); if (window.MB && window.MB.openCredits) window.MB.openCredits(); }
+  });
+  </script>
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found | MegaBerry</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <style>
+    .nf { min-height: 80vh; display: grid; place-items: center; text-align: center; padding: 4rem var(--gutter); position: relative; overflow: hidden; }
+    .nf__orb {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
+      width: 420px; height: 420px; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle, rgba(127,86,217,0.15) 0%, rgba(127,86,217,0.04) 40%, transparent 70%);
+      filter: blur(40px);
+      animation: nf-pulse 6s ease-in-out infinite;
+    }
+    @keyframes nf-pulse { 0%,100% { opacity: 0.6; transform: translate(-50%,-55%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-55%) scale(1.15); } }
+    .nf__inner { position: relative; z-index: 1; display: grid; gap: 0; justify-items: center; }
+    .nf__code {
+      font-family: var(--font-mono); font-size: clamp(6rem, 15vw, 12rem); font-weight: 700;
+      letter-spacing: 0.08em; line-height: 1;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(155,123,234,0.3) 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .nf h1 { font-size: clamp(1.5rem, 3vw, 2.25rem); letter-spacing: -0.03em; margin: 0 0 0.6rem; }
+    .nf__sub { font-size: 1rem; color: var(--text-muted); margin: 0 0 2rem; max-width: 26rem; line-height: 1.5; }
+    .nf__actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    .nf__actions .gk-btn { font-size: 0.95rem; padding: 0.65rem 1.6rem; }
+    .nf__links { margin-top: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    .nf__links a { font-size: 0.85rem; color: var(--text-faint); text-decoration: none; transition: color 0.15s; }
+    .nf__links a:hover { color: var(--accent); }
+  </style>
+</head>
+<body data-page="404">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+  <main id="main">
+    <section class="nf">
+      <div class="nf__orb"></div>
+      <div class="nf__inner">
+        <div class="nf__code">404</div>
+        <h1>This page isn't here.</h1>
+        <p class="nf__sub">The page you're looking for may have moved, been removed, or the link may be wrong.</p>
+        <div class="nf__actions">
+          <a class="gk-btn gk-btn--solid" href="index.html">Back to home</a>
+          <a class="gk-btn" href="faq.html">Read the FAQ</a>
+        </div>
+        <div class="nf__links">
+          <a href="pricing.html">Pricing</a>
+          <a href="trust.html">Trust &amp; safety</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

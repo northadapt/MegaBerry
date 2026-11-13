@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature Requests | MegaBerry</title>
+  <meta name="description" content="Vote on features you want to see in MegaBerry.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+</head>
+<body data-page="feature-requests" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="app__content app__content--wide">
+
+        <div class="fr__layout">
+          <!-- Sidebar -->
+          <div class="fr__sidebar">
+            <!-- Voting Power -->
+            <div class="fr__card fr__card--vp">
+              <div class="fr__vp-head">
+                <div class="fr__vp-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div><strong>Your Voting Power</strong><small>Free plan</small></div>
+              </div>
+              <div class="fr__vp-block">
+                <div class="fr__vp-row"><span>Daily Votes</span><b>0/1 available</b></div>
+                <div class="fr__bar"><div class="fr__bar-fill" style="width:0%"></div></div>
+                <div class="fr__vp-meta"><span>+1 point each</span><span>⏱ 11h 54m</span></div>
+              </div>
+              <div class="fr__vp-block">
+                <div class="fr__vp-row"><span>Supervote</span><b>0/1 available</b></div>
+                <div class="fr__bar"><div class="fr__bar-fill fr__bar-fill--gold" style="width:0%"></div></div>
+                <div class="fr__vp-meta"><span style="display:inline-flex;align-items:center;gap:0.2rem"><svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="#fbbf24" stroke-width="1.5"><polygon points="8,2 10,6 14,6.5 11,9.5 12,14 8,11.5 4,14 5,9.5 2,6.5 6,6"/></svg>+5 points each</span><span>Max plan only</span></div>
+              </div>
+              <div class="fr__vp-cta">
+                <p>Upgrade to Pro for 3 daily votes</p>
+                <a class="gk-btn gk-btn--solid gk-btn--outline gk-btn--sm" href="settings-pricing.html"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Get Pro</a>
+              </div>
+            </div>
+
+            <!-- Have an idea? -->
+            <div class="fr__card fr__card--idea">
+              <div class="fr__idea-head"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fbbf24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg><strong>Have an idea?</strong></div>
+              <p>Submit your own feature request and let the community vote!</p>
+              <button class="gk-btn gk-btn--outline gk-btn--sm" type="button" data-suggest-btn><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>Submit a Feature</button>
+            </div>
+
+            <!-- Statistics -->
+            <div class="fr__card">
+              <strong class="fr__card-title">Statistics</strong>
+              <div class="fr__vp-row"><span>Your votes cast</span><b>1</b></div>
+              <div class="fr__vp-row"><span>Community votes cast</span><b>3,113</b></div>
+              <hr class="fr__hr">
+              <small class="fr__cat-label">BY CATEGORY</small>
+              <div class="fr__vp-row"><span>AI Generation</span><b>1,800</b></div>
+              <div class="fr__vp-row"><span>Development</span><b>620</b></div>
+              <div class="fr__vp-row"><span>Social Media</span><b>465</b></div>
+              <div class="fr__vp-row"><span>Editing Tools</span><b>101</b></div>
+              <div class="fr__vp-row"><span>Agentic AI</span><b>49</b></div>
+              <div class="fr__vp-row"><span>Security</span><b>43</b></div>
+              <div class="fr__vp-row"><span>Community</span><b>35</b></div>
+            </div>
+
+            <!-- How Voting Works -->
+            <button class="fr__how-link" type="button" data-fr-how><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>How Voting Works</button>
+          </div>
+
+          <!-- Feature list -->
+          <div class="fr__main">
+            <div class="fr__list-head">
+              <h1>Feature Requests</h1>
+              <p>Vote on what gets built next. The most popular features get prioritised for development.</p>
+            </div>
+            <div class="fr__filters">
+              <div class="fr__search"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg><input type="text" placeholder="Search features..." data-fr-search></div>
+              <select class="fr__filter" data-fr-cat-filter><option value="">All categories</option><option>AI Generation</option><option>Development</option><option>Social Media</option><option>Editing Tools</option><option>Agentic AI</option><option>Community</option><option>Security</option></select>
+            </div>
+            <div class="fr__list" id="fr-list"></div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- How Voting Works dialog -->
+  <dialog class="sdlg sdlg--sm" data-dlg="fr-how" aria-labelledby="fr-how-title">
+    <div class="sdlg__head">
+      <h2 id="fr-how-title">How Voting Works</h2>
+      <button class="icon-btn" type="button" data-dialog-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="sdlg__body" style="padding-top:0.2rem">
+      <!-- Vote tiers -->
+      <div class="fr__hw-tiers">
+        <div class="fr__hw-tier">
+          <div class="fr__hw-icon" style="background:rgba(155,123,234,0.08)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></div>
+          <span class="fr__hw-label">Daily Vote</span>
+          <strong class="fr__hw-val">+1 pt</strong>
+          <span class="fr__hw-note">All plans</span>
+        </div>
+        <div class="fr__hw-div"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--text-faint)" stroke-width="1.5" opacity="0.3"><path d="m9 18 6-6-6-6"/></svg></div>
+        <div class="fr__hw-tier">
+          <div class="fr__hw-icon" style="background:rgba(251,191,36,0.08)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg></div>
+          <span class="fr__hw-label">Supervote</span>
+          <strong class="fr__hw-val">+5 pts</strong>
+          <span class="fr__hw-note">Max plan</span>
+        </div>
+      </div>
+
+      <!-- Allowances -->
+      <div class="fr__hw-table">
+        <div class="fr__hw-row fr__hw-row--head"><span></span><span>Daily Votes</span><span>Supervotes</span></div>
+        <div class="fr__hw-row"><span>Free</span><span>1</span><span>—</span></div>
+        <div class="fr__hw-row"><span>Pro</span><span>3</span><span>—</span></div>
+        <div class="fr__hw-row"><span>Max</span><span>5</span><span>1</span></div>
+      </div>
+
+      <!-- How it works -->
+      <div class="fr__hw-flow">
+        <div class="fr__hw-step"><span class="fr__hw-dot" style="background:var(--accent)"></span><p>Vote on features you want — votes refresh daily at midnight PST</p></div>
+        <div class="fr__hw-step"><span class="fr__hw-dot" style="background:#fbbf24"></span><p>Features climb the leaderboard as they collect more points</p></div>
+        <div class="fr__hw-step"><span class="fr__hw-dot" style="background:var(--ok)"></span><p>Top-voted features get prioritised and shipped by the team</p></div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Suggest a Feature dialog -->
+  <dialog class="sdlg sdlg--sm" data-dlg="suggest" aria-labelledby="suggest-title">
+    <div class="sdlg__head">
+      <div>
+        <h2 id="suggest-title" style="display:flex;align-items:center;gap:0.4rem"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fbbf24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>Suggest a Feature</h2>
+        <p style="margin:0.15rem 0 0;font-size:0.75rem;color:var(--text-faint)">We review all suggestions and add popular ones to the voting board.</p>
+      </div>
+      <button class="icon-btn" type="button" data-dialog-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="sdlg__body" style="display:grid;gap:0.85rem">
+      <div>
+        <label style="display:block;font-size:0.75rem;font-weight:600;color:var(--text-strong);margin-bottom:0.35rem">Feature Title</label>
+        <input type="text" placeholder="e.g., Custom Watermark Templates" style="width:100%;padding:0.55rem 0.7rem;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-sunken);color:var(--text);font:inherit;font-size:0.82rem;outline:none;transition:border-color 0.15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor=''">
+      </div>
+      <div>
+        <label style="display:block;font-size:0.75rem;font-weight:600;color:var(--text-strong);margin-bottom:0.35rem">Description</label>
+        <textarea rows="4" placeholder="Describe the feature you'd like to see and how it would help you..." style="width:100%;padding:0.55rem 0.7rem;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-sunken);color:var(--text);font:inherit;font-size:0.82rem;outline:none;resize:vertical;transition:border-color 0.15s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor=''"></textarea>
+      </div>
+      <div>
+        <label style="display:block;font-size:0.75rem;font-weight:600;color:var(--text-strong);margin-bottom:0.35rem">Category</label>
+        <select style="width:100%;padding:0.55rem 0.7rem;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg-sunken);color:var(--text);font:inherit;font-size:0.82rem;outline:none;-webkit-appearance:none;appearance:none;cursor:pointer;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 fill=%22none%22 stroke=%22%238b8397%22 stroke-width=%221.5%22><path d=%22m2 4 4 4 4-4%22/></svg>');background-repeat:no-repeat;background-position:right 0.65rem center"><option>AI Generation</option><option>Development</option><option>Social Media</option><option>Editing Tools</option><option>Agentic AI</option><option>Security</option><option>Community</option></select>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:flex-end;gap:0.5rem;margin-top:0.25rem;padding-top:0.65rem;border-top:1px solid var(--line)">
+        <button class="gk-btn" type="button" data-dialog-close>Cancel</button>
+        <button class="gk-btn gk-btn--solid" type="button" data-suggest-submit><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/></svg>Submit Suggestion</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script>
+  (function(){
+    function toast(m){var t=document.querySelector("[data-toast]");if(!t)return;t.textContent=m;t.hidden=false;clearTimeout(t._t);t._t=setTimeout(function(){t.hidden=true},2800);}
+
+    var FEATURES = [
+      { title: "Apex Video", desc: "Generate any video, and just like Apex Image, customized to your specific avatar and style.", votes: 867, cat: "AI Generation", hot: true, voted: true },
+      { title: "Developer API", desc: "Programmatic access via REST API with full documentation.", votes: 620, cat: "Development", hot: true, voted: true },
+      { title: "Apex Voice", desc: "Get an exclusive, custom voice just for you and your AI character.", votes: 567, cat: "AI Generation" },
+      { title: "AI Chatbot, Replies & Messaging", desc: "AI-powered responses for fan engagement and interactions.", votes: 296, cat: "Social Media" },
+      { title: "Build Your Own Avatar", desc: "Design an AI character of your own by selecting, customizing, and crafting.", votes: 190, cat: "AI Generation" },
+      { title: "AI Collab Generator", desc: "Make collaboration content with 2 or more influencers appearing together.", votes: 167, cat: "AI Generation" },
+      { title: "PPV Caption Generator", desc: 'Create premium "locked media" captions and teasers optimized for PPV.', votes: 121, cat: "Social Media" },
+      { title: "Scheduled Publishing", desc: "Schedule AI-generated content to post at optimal times across platforms.", votes: 89, cat: "Social Media" },
+      { title: "Agentic Workflows", desc: "Build automated pipelines that chain multiple AI tools together.", votes: 67, cat: "Agentic AI" },
+      { title: "Community Contests & Prizes", desc: "Top the leaderboards, earn badges, and win prizes like free credits.", votes: 54, cat: "Community" },
+      { title: "Track Followers", desc: "Track follower counts, growth trends, and engagement across socials.", votes: 23, cat: "Social Media" },
+      { title: "Earn With Community Templates", desc: "Monetize your custom templates by sharing them with other creators.", votes: 12, cat: "Community" },
+      { title: "Video Frame Extract", desc: "Pull a still image from any frame in your video.", votes: 11, cat: "Editing Tools" },
+      { title: "Media to Text", desc: "Convert any media (images and video) into text descriptions.", votes: 9, cat: "AI Generation" },
+      { title: "Conversion Landing Pages", desc: "High-converting landing pages with built-in analytics and A/B testing.", votes: 8, cat: "Social Media" },
+      { title: "GIF Maker", desc: "Convert a video clip into an animated GIF.", votes: 4, cat: "Editing Tools" },
+      { title: "Two-Factor Authentication", desc: "Add an extra layer of security to your account with TOTP-based 2FA.", votes: 43, cat: "Security" },
+      { title: "IP Allowlisting", desc: "Restrict account access to specific IP addresses for enterprise security.", votes: 18, cat: "Security" },
+      { title: "Batch Video Processing", desc: "Process multiple videos simultaneously with parallel rendering.", votes: 35, cat: "AI Generation" }
+    ].sort(function(a,b){ return b.votes - a.votes; });
+
+    var CAT_CLS = { "Development": "fr__tag--dev", "Social Media": "fr__tag--social", "Editing Tools": "fr__tag--edit", "Agentic AI": "fr__tag--agent", "Community": "fr__tag--community", "Security": "fr__tag--security" };
+
+    var list = document.getElementById("fr-list");
+
+    function render(features) {
+      list.innerHTML = "";
+      features.forEach(function (f, i) {
+        var el = document.createElement("a");
+        el.href = "#";
+        el.className = "fr__item" + (f.voted ? " fr__item--voted" : "");
+        var tagCls = CAT_CLS[f.cat] || "";
+        el.innerHTML =
+          '<span class="fr__rank">' + (i + 1) + "</span>" +
+          '<div class="fr__info">' +
+            "<strong>" + f.title + (f.hot ? ' <span class="fr__hot">Hot</span>' : "") + "</strong>" +
+            "<p>" + f.desc + "</p>" +
+          "</div>" +
+          '<span class="fr__tag ' + tagCls + '">' + f.cat + '</span>' +
+          '<svg class="fr__chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+        list.appendChild(el);
+
+        el.addEventListener("click", function(e){ e.preventDefault(); });
+      });
+    }
+
+    render(FEATURES);
+
+    // Search
+    var searchInput = document.querySelector("[data-fr-search]");
+    var catFilter = document.querySelector("[data-fr-cat-filter]");
+    function applyFilters() {
+      var q = (searchInput.value || "").toLowerCase();
+      var cat = catFilter.value;
+      var filtered = FEATURES.filter(function(f) {
+        var matchQ = !q || f.title.toLowerCase().indexOf(q) > -1 || f.desc.toLowerCase().indexOf(q) > -1;
+        var matchCat = !cat || f.cat === cat;
+        return matchQ && matchCat;
+      });
+      render(filtered);
+    }
+    searchInput.addEventListener("input", applyFilters);
+    catFilter.addEventListener("change", applyFilters);
+
+    // Dialogs
+    function openDlg(sel) {
+      var d = document.querySelector(sel);
+      if (d) { d.showModal(); d.addEventListener("click", function(e){ if(e.target===d || e.target.closest("[data-dialog-close]")) d.close(); }); }
+    }
+    var howBtn = document.querySelector("[data-fr-how]");
+    if (howBtn) howBtn.addEventListener("click", function(){ openDlg('[data-dlg="fr-how"]'); });
+    var suggestBtn = document.querySelector("[data-suggest-btn]");
+    if (suggestBtn) suggestBtn.addEventListener("click", function(){ openDlg('[data-dlg="suggest"]'); });
+    var submitBtn = document.querySelector("[data-suggest-submit]");
+    if (submitBtn) submitBtn.addEventListener("click", function(){ document.querySelector('[data-dlg="suggest"]').close(); toast("Feature suggestion submitted!"); });
+  })();
+  </script>
+</body>
+</html>

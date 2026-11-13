@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GIF Maker | MegaBerry</title>
+  <meta name="description" content="Your MegaBerry studio.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="app" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="app__content cm" data-gif>
+        <div class="gif__head"><h1>GIF Maker</h1><p>GIF, WebP or MP4 from any clip. Free, no watermark, saved to your gallery.</p></div>
+        <label class="gif__up" data-gif-drop><input type="file" accept="video/mp4,video/quicktime,video/webm" hidden><span class="gif__up-ic">↑</span><span><strong>Upload a video</strong><small>MP4, MOV or WebM, up to 60 seconds and 200 MB. It is saved to your gallery.</small></span><span class="gk-btn">Choose file</span></label>
+        <div class="cm__filters"><h2 class="gif__h2">Your videos</h2><input class="gif__search" type="search" placeholder="Search videos" aria-label="Search videos" data-gif-search></div>
+        <div class="gif__bar" data-gif-bar hidden><strong data-gif-name></strong><div class="gen__seg" role="radiogroup" aria-label="Format"><button type="button" role="radio" aria-checked="true" data-gif-fmt>GIF</button><button type="button" role="radio" aria-checked="false" data-gif-fmt>WebP</button><button type="button" role="radio" aria-checked="false" data-gif-fmt>MP4</button></div><button class="gk-btn gk-btn--solid gk-btn--sm" type="button" data-gif-make>Create</button></div>
+        <div class="cm__grid gif__grid" data-gif-grid><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 1"><span class="frame__tag">Clip 1</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 2"><span class="frame__tag">Clip 2</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 3"><span class="frame__tag">Clip 3</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 4"><span class="frame__tag">Clip 4</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 5"><span class="frame__tag">Clip 5</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 6"><span class="frame__tag">Clip 6</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 7"><span class="frame__tag">Clip 7</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 8"><span class="frame__tag">Clip 8</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 9"><span class="frame__tag">Clip 9</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 10"><span class="frame__tag">Clip 10</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 11"><span class="frame__tag">Clip 11</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 12"><span class="frame__tag">Clip 12</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 13"><span class="frame__tag">Clip 13</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 14"><span class="frame__tag">Clip 14</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 15"><span class="frame__tag">Clip 15</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 16"><span class="frame__tag">Clip 16</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 17"><span class="frame__tag">Clip 17</span></button><button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip 18"><span class="frame__tag">Clip 18</span></button></div>
+        <p class="cm__empty" data-gif-empty hidden>No videos match your search.</p>
+      </main>
+    </div>
+  </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var root = document.querySelector("[data-gif]"), $ = function (s) { return root.querySelector(s); }, $$ = function (s) { return [].slice.call(root.querySelectorAll(s)); }, n = 18; var toastEl = document.querySelector("[data-toast]"), toastT; var toast = function (m) { if (!toastEl) return; toastEl.textContent = m; toastEl.hidden = false; requestAnimationFrame(function () { toastEl.classList.add("is-on"); }); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove("is-on"); }, 2600); };
+    var pick = function (t) { $$("[data-gif-tile]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === t)); }); $("[data-gif-bar]").hidden = !t; if (t) $("[data-gif-name]").textContent = t.querySelector(".frame__tag").textContent; };
+    root.addEventListener("click", function (e) {
+      var b; if ((b = e.target.closest("[data-gif-tile]"))) { pick(b.getAttribute("aria-pressed") === "true" ? null : b); return; }
+      if ((b = e.target.closest("[data-gif-fmt]"))) { $$("[data-gif-fmt]").forEach(function (x) { x.setAttribute("aria-checked", String(x === b)); }); return; }
+      if (e.target.closest("[data-gif-make]")) { var f = $$("[data-gif-fmt]").filter(function (x) { return x.getAttribute("aria-checked") === "true"; })[0].textContent; toast(f + " created from " + $("[data-gif-name]").textContent + " (demo)."); }
+    });
+    $("[data-gif-search]").addEventListener("input", function () { var q = this.value.trim().toLowerCase(), shown = 0; $$("[data-gif-tile]").forEach(function (t) { var ok = t.getAttribute("data-name").indexOf(q) > -1; t.hidden = !ok; if (ok) shown++; }); $("[data-gif-empty]").hidden = shown > 0; });
+    var inp = $("[data-gif-drop] input"); inp.addEventListener("change", function () { if (!inp.files.length) return; n++; $("[data-gif-grid]").insertAdjacentHTML("afterbegin", '<button class="frame cm__tile gif__tile" type="button" data-gif-tile data-name="clip ' + n + '"><span class="frame__tag">Clip ' + n + "</span></button>"); inp.value = ""; pick($("[data-gif-tile]")); });
+  });
+  </script>
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  // Static site on Cloudflare Workers (no Worker script, assets only).
+  // Deploy from this folder with:  npx wrangler deploy
+  "name": "megaberry-site",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./",
+    // unknown URLs get 404.html with a 404 status
+    "not_found_handling": "404-page"
+  }
+}

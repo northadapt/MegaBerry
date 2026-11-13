@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ticket | MegaBerry</title>
+  <meta name="description" content="Your MegaBerry support ticket.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="support" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="app__content">
+        <div class="card sup__gate" data-support-gate hidden>
+          <span class="auth__done-icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="3"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg></span>
+          <h2>Sign in to contact support</h2>
+          <p class="muted">You need a MegaBerry account to open a support ticket, so we can find your plan and usage.</p>
+          <div class="sup__gate-actions">
+            <a class="gk-btn gk-btn--solid gk-btn--lg" href="login.html">Sign in</a>
+            <a class="gk-btn gk-btn--lg" href="signup.html">Create account</a>
+          </div>
+        </div>
+        <div data-support-content>
+          <div class="d-head">
+            <a class="app__back" href="support.html" aria-label="Back to tickets"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></a>
+            <div><h1 data-d-title>Ticket</h1><p data-d-sub>&nbsp;</p></div>
+          </div>
+
+          <dl class="d-meta" data-d-meta></dl>
+          <div class="d-thread" data-d-thread></div>
+
+          <form class="d-reply" data-reply-form novalidate>
+            <p class="d-note" data-reply-note hidden>This ticket is closed. Replying will reopen it.</p>
+            <ul class="ticket__files" data-reply-files hidden></ul>
+            <div class="d-reply__bar">
+              <label class="d-reply__icon" title="Attach file"><span class="sr-only">Attach file</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 11-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9"/></svg><input type="file" multiple hidden data-reply-file></label>
+              <textarea name="message" rows="1" maxlength="5000" placeholder="Write a message" aria-label="Your reply" required></textarea>
+              <button class="d-reply__send" type="submit" disabled aria-label="Send reply" title="Send reply"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg></button>
+            </div>
+            <p class="d-reply__meta"><span class="d-reply__count" hidden><span data-reply-count>0</span> / 5000</span><span class="form__status" role="status" data-reply-status></span></p>
+          </form>
+          <p class="d-eta">We typically respond within 1-2 business days.</p>
+        </div>
+        <div class="sup__empty" data-d-missing hidden>
+          <h2>We couldn't find that ticket</h2>
+          <p>It may have been removed, or the link is incorrect.</p>
+          <a class="gk-btn gk-btn--solid" href="support.html">Back to tickets</a>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

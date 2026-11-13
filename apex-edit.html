@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apex Edit | MegaBerry</title>
+  <meta name="description" content="Edit images with a prompt while the person stays the same.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/tools.js" defer></script>
+</head>
+<body data-page="app" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="gen" data-tool data-unit="20" data-n="4">
+
+        <!-- Top bar -->
+        <div class="gen__bar">
+          <nav class="gen__crumb" aria-label="Breadcrumb">
+            <a href="studio.html">Create</a>
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>
+            <span aria-current="page">Apex Edit</span>
+          </nav>
+          <div class="gen__actions">
+            <div class="gen__dd" data-gen-dd="view">
+              <button class="gen__tool" type="button" data-gen-dd-btn><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg><span>View</span></button>
+              <div class="gen__dd-menu" hidden>
+                <div class="gen__dd-group"><span class="gen__dd-label">Layout</span>
+                  <button class="gen__dd-opt is-on" data-opt="grid"><span class="gen__dd-dot"></span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Grid</button>
+                  <button class="gen__dd-opt" data-opt="row"><span class="gen__dd-dot"></span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="12" height="4" rx="1"/><rect x="2" y="9" width="12" height="4" rx="1"/></svg>Row</button>
+                  <button class="gen__dd-opt" data-opt="table"><span class="gen__dd-dot"></span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M2 6h12M2 10h12M6 2v12"/></svg>Table</button>
+                </div>
+                <div class="gen__dd-group"><span class="gen__dd-label">Size</span>
+                  <button class="gen__dd-opt" data-opt="xs"><span class="gen__dd-dot"></span>Extra Small</button>
+                  <button class="gen__dd-opt is-on" data-opt="sm"><span class="gen__dd-dot"></span>Small</button>
+                  <button class="gen__dd-opt" data-opt="md"><span class="gen__dd-dot"></span>Medium</button>
+                  <button class="gen__dd-opt" data-opt="lg"><span class="gen__dd-dot"></span>Large</button>
+                </div>
+                <div class="gen__dd-group"><span class="gen__dd-label">Grouping</span>
+                  <button class="gen__dd-opt is-on" data-opt="job"><span class="gen__dd-dot"></span>Group by job</button>
+                  <button class="gen__dd-opt" data-opt="all"><span class="gen__dd-dot"></span>Show all items</button>
+                </div>
+              </div>
+            </div>
+            <div class="gen__dd" data-gen-dd="filter">
+              <button class="gen__tool" type="button" data-gen-dd-btn><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14l-5 6v4l-4 2V10z"/></svg><span>Filter &amp; Sort</span></button>
+              <div class="gen__dd-menu" hidden>
+                <div class="gen__dd-group"><span class="gen__dd-label">Filters</span>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M2 6h12"/><path d="M5 3v3"/></svg>Date<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="m6 7 2 2 3-3"/></svg>Media type<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 2l1.5 3.5 3.5 1.5-3.5 1.5L8 12l-1.5-3.5L3 7l3.5-1.5z"/><path d="M13 1v2M12 2h2"/></svg>Workflow<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="5" r="3"/><circle cx="5" cy="12" r="2.5"/><circle cx="11" cy="12" r="2.5"/></svg>Model<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2"/></svg>Status<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12"/><ellipse cx="8" cy="8" rx="3" ry="6"/></svg>Published<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                </div>
+                <div class="gen__dd-group"><span class="gen__dd-label">Sort by</span>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 3v10M4 13l-2.5-3M4 13l2.5-3M12 13V3M12 3l-2.5 3M12 3l2.5 3"/></svg>Order<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="gen__dd" data-gen-dd="content">
+              <button class="gen__tool is-on" type="button" data-gen-dd-btn><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5L7 8.5l3.5-1.5z"/><path d="M17 1v3M15.5 2.5h3"/></svg><span>Generated</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m3 4.5 3 3 3-3"/></svg></button>
+              <div class="gen__dd-menu" hidden>
+                <div class="gen__dd-group"><span class="gen__dd-label">My content</span>
+                  <button class="gen__dd-opt is-on" data-opt="generated"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 2l1.5 3.5 3.5 1.5-3.5 1.5L8 12l-1.5-3.5L3 7l3.5-1.5z"/><path d="M13 1v2M12 2h2"/></svg>Generated</button>
+                  <button class="gen__dd-opt" data-opt="recent"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2.5 1.5"/></svg>Recent</button>
+                  <button class="gen__dd-opt" data-opt="favorites"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 2l1.5 4H14l-3.5 3 1.5 4L8 10.5 4 13l1.5-4L2 6h4.5z"/></svg>Favorites</button>
+                  <button class="gen__dd-opt" data-opt="uploads"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 10V3M5 5.5 8 3l3 2.5"/><path d="M3 11v2h10v-2"/></svg>Uploads</button>
+                  <button class="gen__dd-opt" data-opt="downloads"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 3v7M5 7.5 8 10l3-2.5"/><path d="M3 11v2h10v-2"/></svg>Downloads</button>
+                  <button class="gen__dd-opt" data-opt="edited"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M10 3l3 3L5 14H2v-3z"/></svg>Edited</button>
+                  <button class="gen__dd-opt" data-opt="trash"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M3 5h10M5 5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1M6 7v4M8 7v4M10 7v4"/><path d="M4 5l.5 8a1.5 1.5 0 0 0 1.5 1.5h4a1.5 1.5 0 0 0 1.5-1.5L12 5"/></svg>Trash</button>
+                </div>
+              </div>
+            </div>
+            <label class="gen__search"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="m18 18-3.5-3.5"/></svg><input type="text" placeholder="Search..." aria-label="Search generated items"></label>
+          </div>
+          <div class="gen__bar-end">
+            <button class="gen__tool" type="button"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v10M8 11l4 4 4-4"/><path d="M4 15v2h12v-2"/></svg><span>Upload</span></button>
+            <button class="gen__tool" type="button"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M3 10h14"/><path d="M10 3v14"/></svg><span>Folders</span></button>
+          </div>
+        </div>
+
+        <div class="gen__layout">
+          <!-- Left: controls -->
+          <div class="gen__panel">
+            <div class="gen__toggle" role="radiogroup" aria-label="Prompt source">
+              <button type="button" role="radio" aria-checked="true"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M3 8h10"/><ellipse cx="8" cy="8" rx="3" ry="6"/></svg><span>Global</span></button>
+              <button type="button" role="radio" aria-checked="false"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5 13.5 5 5 13.5H2.5V11z"/></svg><span>Own</span></button>
+            </div>
+            <button class="gen__prompt-pick" type="button" data-t-ppick><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10v12l-5-3-5 3z"/></svg><span>Select prompt</span><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+            <textarea class="gen__textarea" rows="6" placeholder="Describe what you want..." aria-label="Prompt"></textarea>
+            <div class="gen__section">
+              <div class="gen__section-head"><strong>Reference Image</strong><span class="gen__muted t__count" data-t-count="ref" data-suffix=" images">0/8 images</span></div>
+              <label class="gen__drop t__drop" data-t-drop="ref" data-max="8"><input type="file" accept="image/*" multiple hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><strong>Upload or drop images</strong><small>Multiple files supported</small></label>
+            </div>
+            <div class="gen__foot">
+              <div class="gen__qty"><button type="button" aria-label="Decrease" data-t-dec>−</button><span data-t-n>4</span><button type="button" aria-label="Increase" data-t-inc>+</button></div>
+              <span class="ai__cost"><s data-t-cost>80</s><b>0</b><i>C</i></span>
+            </div>
+            <button class="gk-btn gk-btn--solid gk-btn--lg gen__go" type="button" data-t-go data-t-need="ref" disabled>Generate</button>
+          </div>
+
+          <!-- Right: gallery -->
+          <div class="gen__gallery ai__gallery" data-t-gallery>
+            <div class="gen__empty" data-t-empty>
+              <span class="gen__empty-ic"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="36" height="32" rx="4"/><path d="m6 32 10-10 8 8 6-6 12 12"/><circle cx="31" cy="18" r="3"/></svg></span>
+              <h2>No items found</h2>
+              <p>Generate something to see it here.</p>
+            </div>
+            <div class="ai__grid" data-t-grid hidden></div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <dialog class="ppick" data-prompt-pick-dlg aria-labelledby="ppick-title">
+    <div class="ppick__head">
+      <h2 id="ppick-title" class="sr-only">Select prompt</h2>
+      <div class="ppick__tabs" role="tablist">
+        <button class="ppick__tab is-on" role="tab" data-ppick-tab="recent" aria-selected="true"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 5v3.5l2.5 1.5"/></svg>Recent <span data-ppick-count-recent>(0)</span></button>
+        <button class="ppick__tab" role="tab" data-ppick-tab="saved" aria-selected="false"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10v12l-5-3-5 3z"/></svg>Saved <span data-ppick-count-saved>(0)</span></button>
+      </div>
+      <button class="icon-btn ppick__x" type="button" data-ppick-close aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="ppick__body" data-ppick-panel="recent">
+      <p class="ppick__empty">No recent prompts yet</p>
+    </div>
+    <div class="ppick__body" data-ppick-panel="saved" hidden>
+      <p class="ppick__empty">No saved prompts yet</p>
+    </div>
+  </dialog>
+
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

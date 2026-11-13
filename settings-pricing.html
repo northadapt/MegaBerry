@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing · Settings | MegaBerry</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <style>
+    .sp__frame-wrap { position: relative; margin: -1rem -1rem 0; }
+    .sp__back { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.82rem; color: var(--text-muted); text-decoration: none; margin-bottom: 0.75rem; transition: color 0.15s; }
+    .sp__back:hover { color: var(--text-strong); }
+    .sp__back svg { transition: transform 0.15s; }
+    .sp__back:hover svg { transform: translateX(-3px); }
+    .sp__frame { width: 100%; border: none; min-height: 100vh; background: var(--bg); overflow: hidden; }
+  </style>
+</head>
+<body data-page="app" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="app__content" style="max-width:none;padding-top:1rem">
+        <a class="sp__back" href="settings.html#billing" data-sp-back hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Back to Billing</a>
+        <header class="sp__head"><div><h1>Plans</h1><p data-sp-sub></p></div><span class="sp__now">Current plan <b data-sp-plan>Free</b></span></header>
+        <div class="sp__frame-wrap">
+          <iframe class="sp__frame" src="pricing.html?embed=1" id="pricing-frame"></iframe>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="site-footer" id="site-footer"></footer>
+  <script>
+    // Auto-resize iframe to content height
+    var frame = document.getElementById("pricing-frame");
+    frame.addEventListener("load", function () {
+      try {
+        var h = frame.contentDocument.body.scrollHeight;
+        frame.style.height = h + "px";
+        // Hide the pricing page's own header/footer/nav inside the iframe
+        var doc = frame.contentDocument;
+        var hdr = doc.getElementById("site-header"); if (hdr) hdr.style.display = "none";
+        var ftr = doc.getElementById("site-footer"); if (ftr) ftr.style.display = "none";
+        var nav = doc.querySelector(".site-nav"); if (nav) nav.style.display = "none";
+        // Recalc height after hiding
+        frame.style.height = doc.body.scrollHeight + "px";
+        setTimeout(function(){ frame.style.height = doc.body.scrollHeight + "px"; }, 500);
+      } catch(e) {}
+    });
+  </script>
+  <script>if (/[?&]from=billing/.test(location.search)) { var b = document.querySelector("[data-sp-back]"); if (b) b.hidden = false; }</script>
+  <script>
+  (function () {
+    var COPY = { Free: "You're on Free and pay as you go. Upgrade for unlimited Apex images and a faster queue.", Pro: "You're on Pro. Move up to Max for the fastest queue, the largest batches and your own trained avatar." };
+    var sync = function () {
+      var plan = (document.body.getAttribute("data-dev-mode") || "linked") === "linked" ? "Pro" : "Free";
+      document.querySelector("[data-sp-plan]").textContent = plan; document.querySelector("[data-sp-sub]").textContent = COPY[plan];
+    };
+    new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ["data-dev-mode"] });
+    document.addEventListener("DOMContentLoaded", function () { sync(); setTimeout(sync, 0); setTimeout(sync, 300); });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Outfit Generator | MegaBerry</title>
+  <meta name="description" content="Generate outfits from quick options or your own prompt.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="app" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="gen">
+
+        <!-- Top bar -->
+        <div class="gen__bar">
+          <nav class="gen__crumb" aria-label="Breadcrumb">
+            <a href="studio.html">Create</a>
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>
+            <span aria-current="page">Outfit Generator</span>
+          </nav>
+          <div class="gen__actions">
+            <div class="gen__dd" data-gen-dd="view">
+              <button class="gen__tool" type="button" data-gen-dd-btn><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg><span>View</span></button>
+              <div class="gen__dd-menu" hidden>
+                <div class="gen__dd-group"><span class="gen__dd-label">Layout</span>
+                  <button class="gen__dd-opt is-on" data-opt="grid"><span class="gen__dd-dot"></span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Grid</button>
+                  <button class="gen__dd-opt" data-opt="row"><span class="gen__dd-dot"></span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="12" height="4" rx="1"/><rect x="2" y="9" width="12" height="4" rx="1"/></svg>Row</button>
+                  <button class="gen__dd-opt" data-opt="table"><span class="gen__dd-dot"></span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M2 6h12M2 10h12M6 2v12"/></svg>Table</button>
+                </div>
+                <div class="gen__dd-group"><span class="gen__dd-label">Size</span>
+                  <button class="gen__dd-opt" data-opt="xs"><span class="gen__dd-dot"></span>Extra Small</button>
+                  <button class="gen__dd-opt is-on" data-opt="sm"><span class="gen__dd-dot"></span>Small</button>
+                  <button class="gen__dd-opt" data-opt="md"><span class="gen__dd-dot"></span>Medium</button>
+                  <button class="gen__dd-opt" data-opt="lg"><span class="gen__dd-dot"></span>Large</button>
+                </div>
+                <div class="gen__dd-group"><span class="gen__dd-label">Grouping</span>
+                  <button class="gen__dd-opt is-on" data-opt="job"><span class="gen__dd-dot"></span>Group by job</button>
+                  <button class="gen__dd-opt" data-opt="all"><span class="gen__dd-dot"></span>Show all items</button>
+                </div>
+              </div>
+            </div>
+            <div class="gen__dd" data-gen-dd="filter">
+              <button class="gen__tool" type="button" data-gen-dd-btn><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h14l-5 6v4l-4 2V10z"/></svg><span>Filter &amp; Sort</span></button>
+              <div class="gen__dd-menu" hidden>
+                <div class="gen__dd-group"><span class="gen__dd-label">Filters</span>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M2 6h12"/><path d="M5 3v3"/></svg>Date<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="m6 7 2 2 3-3"/></svg>Media type<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 2l1.5 3.5 3.5 1.5-3.5 1.5L8 12l-1.5-3.5L3 7l3.5-1.5z"/><path d="M13 1v2M12 2h2"/></svg>Workflow<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="5" r="3"/><circle cx="5" cy="12" r="2.5"/><circle cx="11" cy="12" r="2.5"/></svg>Model<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2"/></svg>Status<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M2 8h12"/><ellipse cx="8" cy="8" rx="3" ry="6"/></svg>Published<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                </div>
+                <div class="gen__dd-group"><span class="gen__dd-label">Sort by</span>
+                  <button class="gen__dd-row"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 3v10M4 13l-2.5-3M4 13l2.5-3M12 13V3M12 3l-2.5 3M12 3l2.5 3"/></svg>Order<svg class="gen__dd-chev" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="gen__dd" data-gen-dd="content">
+              <button class="gen__tool is-on" type="button" data-gen-dd-btn><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5L7 8.5l3.5-1.5z"/><path d="M17 1v3M15.5 2.5h3"/></svg><span>Generated</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m3 4.5 3 3 3-3"/></svg></button>
+              <div class="gen__dd-menu" hidden>
+                <div class="gen__dd-group"><span class="gen__dd-label">My content</span>
+                  <button class="gen__dd-opt is-on" data-opt="generated"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 2l1.5 3.5 3.5 1.5-3.5 1.5L8 12l-1.5-3.5L3 7l3.5-1.5z"/><path d="M13 1v2M12 2h2"/></svg>Generated</button>
+                  <button class="gen__dd-opt" data-opt="recent"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2.5 1.5"/></svg>Recent</button>
+                  <button class="gen__dd-opt" data-opt="favorites"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 2l1.5 4H14l-3.5 3 1.5 4L8 10.5 4 13l1.5-4L2 6h4.5z"/></svg>Favorites</button>
+                  <button class="gen__dd-opt" data-opt="uploads"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 10V3M5 5.5 8 3l3 2.5"/><path d="M3 11v2h10v-2"/></svg>Uploads</button>
+                  <button class="gen__dd-opt" data-opt="downloads"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 3v7M5 7.5 8 10l3-2.5"/><path d="M3 11v2h10v-2"/></svg>Downloads</button>
+                  <button class="gen__dd-opt" data-opt="edited"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M10 3l3 3L5 14H2v-3z"/></svg>Edited</button>
+                  <button class="gen__dd-opt" data-opt="trash"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M3 5h10M5 5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1M6 7v4M8 7v4M10 7v4"/><path d="M4 5l.5 8a1.5 1.5 0 0 0 1.5 1.5h4a1.5 1.5 0 0 0 1.5-1.5L12 5"/></svg>Trash</button>
+                </div>
+              </div>
+            </div>
+            <label class="gen__search"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><path d="m18 18-3.5-3.5"/></svg><input type="text" placeholder="Search..." aria-label="Search generated items"></label>
+          </div>
+          <div class="gen__bar-end">
+            <button class="gen__tool" type="button"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v10M8 11l4 4 4-4"/><path d="M4 15v2h12v-2"/></svg><span>Upload</span></button>
+            <button class="gen__tool" type="button"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M3 10h14"/><path d="M10 3v14"/></svg><span>Folders</span></button>
+          </div>
+        </div>
+
+        <div class="gen__layout">
+          <!-- Left: controls -->
+          <div class="gen__panel">
+            <div class="gen__toggle" role="radiogroup" aria-label="Creation mode">
+              <button type="button" role="radio" aria-checked="true" data-ai-mode="template"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2l1.3 3.7L12 7l-3.7 1.300L7 12 5.7 8.3 2 7l3.7-1.300zM12.5 10.500l.5 1.5 1.5.5-1.5.5-.5 1.5-.5-1.5-1.5-.5 1.5-.5z"/></svg><span>Template</span></button>
+              <button type="button" role="radio" aria-checked="false" data-ai-mode="prompt"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5 13.5 5 5 13.500H2.500V11z"/></svg><span>Prompt</span></button>
+            </div>
+
+            <!-- Template mode -->
+            <div class="ai__mode" data-ai-panel="template">
+              <button class="gen__prompt-pick" type="button" data-ai-preset>
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10v12l-5-3-5 3z"/></svg>
+                <span>Select preset</span>
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>
+              </button>
+              <div class="ai__quick-head"><span>Quick options</span><button type="button" data-og-random>Randomize</button></div>
+              <label class="ai__opt"><span>Category</span><select data-og-f="cat"></select></label>
+              <label class="ai__opt"><span>Primary Color</span><select data-og-f="color"></select></label>
+              <label class="ai__opt"><span>Material</span><select data-og-f="material"></select></label>
+              <label class="ai__opt"><span>Pattern</span><select data-og-f="pattern"></select></label>
+            </div>
+
+            <!-- Prompt mode -->
+            <div class="ai__mode" data-ai-panel="prompt" hidden>
+              <button class="gen__prompt-pick" type="button" data-ai-ppick>
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10v12l-5-3-5 3z"/></svg>
+                <span>Select prompt</span>
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>
+              </button>
+              <label class="ai__ta"><span>Positive</span><textarea class="gen__textarea" rows="5" placeholder="Describe what you want..." data-ai-pos></textarea></label>
+              <label class="ai__ta"><span>Negative</span><textarea class="gen__textarea" rows="3" placeholder="What to avoid..." data-ai-neg></textarea></label>
+            </div>
+
+            <button class="ai__more" type="button" data-ai-more aria-expanded="false">
+              <i><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5h7M13 5h1M2 11h1M7 11h7"/><circle cx="11" cy="5" r="1.8"/><circle cx="5" cy="11" r="1.8"/></svg></i>
+              <span><strong>More Options</strong><small>Pick articles, colours and materials</small></span>
+              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg>
+            </button>
+            <p class="ai__hint" data-ai-hint>All options currently randomized</p>
+
+            <div class="gen__foot">
+              <div class="gen__qty" data-ai-qty>
+                <button type="button" aria-label="Decrease" data-ai-dec>−</button>
+                <span data-ai-n>4</span>
+                <button type="button" aria-label="Increase" data-ai-inc>+</button>
+              </div>
+              <span class="ai__cost"><s data-ai-cost>40</s><b>0</b><i>C</i></span>
+            </div>
+
+            <p class="ai__err" role="alert" data-ai-err hidden>Add a prompt before generating.</p>
+            <button class="gk-btn gk-btn--solid gk-btn--lg gen__go" type="button" data-ai-go>I'm Feeling Lucky</button>
+          </div>
+
+          <!-- Right: gallery -->
+          <div class="gen__gallery ai__gallery" data-ai-gallery>
+            <div class="gen__empty" data-ai-empty>
+              <span class="gen__empty-ic"><svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="36" height="32" rx="4"/><path d="m6 32 10-10 8 8 6-6 12 12"/><circle cx="31" cy="18" r="3"/></svg></span>
+              <h2>No items found</h2>
+              <p>Generate something to see it here.</p>
+            </div>
+            <div class="ai__grid" data-ai-grid hidden></div>
+
+            <!-- Customize Outfit panel -->
+            <section class="ai__cp og" data-og hidden aria-labelledby="og-title">
+              <header class="ai__cp-head">
+                <h2 id="og-title">Customize Outfit</h2>
+                <button class="icon-btn" type="button" data-og-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+              </header>
+              <div class="ai__cp-body">
+                <div class="ai__cp-main og__main">
+                  <div class="og__bar">
+                    <div class="gen__seg" role="radiogroup" aria-label="Layout"><button type="button" role="radio" aria-checked="false" data-og-view="grid">Grid</button><button type="button" role="radio" aria-checked="true" data-og-view="list">List</button></div>
+                    <button class="gk-btn gk-btn--sm" type="button" data-og-random>Randomize</button>
+                    <select class="og__preset" aria-label="Preset"><option>Select preset</option><option disabled>No saved presets yet</option></select>
+                    <button class="gk-btn gk-btn--sm" type="button" data-og-save>Save Preset</button>
+                    <button class="gk-btn gk-btn--sm" type="button" data-og-tips-btn aria-expanded="false">Tips</button>
+                  </div>
+                  <details class="og__sec" open><summary>Primary Article</summary>
+                    <div class="og__row3" data-og-list><label class="ai__opt"><span>Category</span><select data-og-f="cat"></select></label><label class="ai__opt"><span>Subcategory</span><select data-og-f="sub"></select></label><label class="ai__opt"><span>Article</span><select data-og-f="art"></select></label></div>
+                    <div class="og__cols" data-og-grid hidden></div>
+                  </details>
+                  <details class="og__sec"><summary>Secondary Article <span data-og-sec-state>Currently auto-matched</span></summary>
+                    <p class="og__note">When Primary Article is Random, the system will automatically match a complementary secondary article (e.g., Tops → Bottoms).</p>
+                    <div class="og__row3"><label class="ai__opt"><span>Category</span><select data-og-f="cat2"></select></label><label class="ai__opt"><span>Subcategory</span><select data-og-f="sub2"></select></label><label class="ai__opt"><span>Article</span><select data-og-f="art2"></select></label></div>
+                  </details>
+                  <details class="og__sec" open><summary>Colors</summary>
+                    <div class="og__row2"><label class="ai__opt"><span>Primary Color</span><select data-og-f="color"></select></label><label class="ai__opt"><span>Secondary Color</span><select data-og-f="color2"></select></label></div>
+                  </details>
+                  <details class="og__sec" open><summary>Style &amp; Material</summary>
+                    <div class="og__row2"><label class="ai__opt"><span>Style Modifier</span><select data-og-f="style"></select></label><label class="ai__opt"><span>Material</span><select data-og-f="material"></select></label><label class="ai__opt"><span>Pattern</span><select data-og-f="pattern"></select></label><label class="ai__opt"><span>Embellishments</span><select data-og-f="embell"></select></label></div>
+                  </details>
+                  <div class="og__sum"><div class="og__sum-head"><strong>Selection Summary</strong><span class="og__badge" data-og-nrand></span><span data-og-nnone></span></div><div class="og__chips" data-og-chips></div></div>
+                  <div class="ai__cp-foot">
+                    <div class="gen__foot">
+                      <div class="gen__qty"><button type="button" aria-label="Decrease" data-ai-dec>−</button><span data-ai-n>4</span><button type="button" aria-label="Increase" data-ai-inc>+</button></div>
+                      <span class="ai__cost"><s data-ai-cost>40</s><b>0 credits</b></span>
+                    </div>
+                    <button class="gk-btn gk-btn--solid gk-btn--lg gen__go" type="button" data-og-go>I'm Feeling Lucky</button>
+                  </div>
+                </div>
+                <aside class="ai__tips" data-og-tips hidden>
+                  <h3>Tips &amp; Help</h3>
+                  <ul>
+                    <li>Use <b>Random</b> for any field to discover new styles and combinations you might not have considered.</li>
+                    <li>Select a <b>Category</b> first. Subcategory and Article options will update based on your choice.</li>
+                    <li>Combine <b>Material + Pattern</b> for more realistic textures (e.g., Silk + Floral, Denim + Solid).</li>
+                    <li><b>Secondary colors</b> work best for accents, trims, or two-tone designs.</li>
+                    <li>Use <b>Embellishments</b> sparingly. They add detail but can overwhelm simple garments.</li>
+                  </ul>
+                </aside>
+              </div>
+            </section>
+
+            <!-- Custom Prompts panel -->
+            <section class="ai__cp" data-ai-cp hidden aria-labelledby="ai-cp-title">
+              <header class="ai__cp-head">
+                <h2 id="ai-cp-title">Custom Prompts</h2>
+                <button class="icon-btn" type="button" data-ai-cp-close aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+              </header>
+              <div class="ai__cp-body">
+                <div class="ai__cp-main">
+                  <div class="ai__cp-top">
+                    <div class="ai__cp-tabs" role="tablist">
+                      <button type="button" role="tab" aria-selected="true" data-ai-cp-tab="pos">Positive Prompt</button>
+                      <button type="button" role="tab" aria-selected="false" data-ai-cp-tab="neg">Negative Prompt</button>
+                    </div>
+                    <button class="gk-btn gk-btn--sm" type="button" data-ai-tips-btn aria-expanded="false">Tips</button>
+                  </div>
+                  <strong class="ai__cp-label">Mode</strong>
+                  <div class="ai__cp-seg" data-ai-cp-modes></div>
+                  <strong class="ai__cp-label" data-ai-cp-tlabel>Your Prompt</strong>
+                  <textarea class="ai__cp-text" rows="8" data-ai-cp-text></textarea>
+                  <span class="ai__cp-count" data-ai-cp-count>0 characters</span>
+                  <label class="ai__face" data-ai-face hidden><strong>Face Control</strong><span>(advanced)</span><input type="checkbox"><span class="gen__switch-track"></span></label>
+                  <p class="ai__cp-info" data-ai-cp-info></p>
+                  <div class="ai__cp-foot">
+                    <div class="gen__foot">
+                      <div class="gen__qty"><button type="button" aria-label="Decrease" data-ai-dec>−</button><span data-ai-n>4</span><button type="button" aria-label="Increase" data-ai-inc>+</button></div>
+                      <span class="ai__cost"><s data-ai-cost>40</s><b>0 credits</b></span>
+                    </div>
+                    <button class="gk-btn gk-btn--solid gk-btn--lg gen__go" type="button" data-ai-cp-go>Generate</button>
+                  </div>
+                </div>
+                <aside class="ai__tips" data-ai-tips hidden>
+                  <h3>Tips &amp; Help</h3>
+                  <ul>
+                    <li>Be <b>specific about garment type</b>: "red silk midi dress" works better than just "dress".</li>
+                    <li>Include <b>material and texture</b> details (silk, leather, knit, velvet) for realistic results.</li>
+                    <li>Specify the <b>shot type</b> (flatlay, hanging, folded, or on-model) for consistent framing.</li>
+                    <li>Add <b>lighting and background</b> cues (studio lighting, white marble) for professional results.</li>
+                    <li>Keep prompts <b>concise and focused</b>. Shorter, well-crafted prompts often produce better quality.</li>
+                    <li><b>Template mode</b> preserves studio styling. Use <b>Custom mode</b> for complete control.</li>
+                  </ul>
+                </aside>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="ppick" data-prompt-pick-dlg aria-labelledby="ppick-title">
+    <div class="ppick__head">
+      <h2 id="ppick-title" class="sr-only">Select prompt</h2>
+      <div class="ppick__tabs" role="tablist">
+        <button class="ppick__tab is-on" role="tab" data-ppick-tab="recent" aria-selected="true"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 5v3.5l2.5 1.5"/></svg>Recent <span data-ppick-count-recent>(0)</span></button>
+        <button class="ppick__tab" role="tab" data-ppick-tab="saved" aria-selected="false"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10v12l-5-3-5 3z"/></svg>Saved <span data-ppick-count-saved>(0)</span></button>
+      </div>
+      <button class="icon-btn ppick__x" type="button" data-ppick-close aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="ppick__body" data-ppick-panel="recent">
+      <p class="ppick__empty">No recent prompts yet</p>
+    </div>
+    <div class="ppick__body" data-ppick-panel="saved" hidden>
+      <p class="ppick__empty">No saved prompts yet</p>
+    </div>
+  </dialog>
+
+  <script>
+  /* Apex Image page. Demo only: generation adds placeholder tiles. */
+  document.addEventListener("DOMContentLoaded", function () {
+    var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+    var st = { mode: "template", n: 4, cpTab: "pos", cpMode: { pos: "avatar", neg: "template" }, text: { pos: "", neg: "" }, made: 0 };
+    var toastEl = $("[data-toast]"), toastT;
+    var toast = function (m) { if (!toastEl) return; toastEl.textContent = m; toastEl.hidden = false; requestAnimationFrame(function () { toastEl.classList.add("is-on"); }); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove("is-on"); }, 2600); };
+    var CP = {
+      pos: [["avatar", "Avatar+", "Describe the scene or action (e.g., standing in a garden, laughing)...", "<b>Avatar+ Mode:</b> Your prompt is combined with our enhancement algorithm. Best for character consistency."],
+            ["template", "Template", "Describe your clothing item (e.g., red leather jacket, flat lay)...", "<b>Custom + Template Mode:</b> Your prompt is combined with our default template for your avatar. Best for granular creation."],
+            ["custom", "Custom", "Enter your complete prompt...", "<b>Full Custom:</b> Disclaimer: Your text becomes the entire and complete prompt. You are fully responsible for your own results with no help from us for consistency of your avatar."]],
+      neg: [["template", "Template", "Enter custom negative prompt text...", "<b>Template + Append:</b> Your custom text is appended to the default negative prompt."],
+            ["custom", "Custom", "Enter custom negative prompt text...", "<b>Full Custom:</b> Your text replaces the entire negative prompt."]]
+    };
+    var og = $("[data-og]"); if (og) { CP.pos = CP.pos.slice(1); st.cpMode.pos = "template"; }
+    var cp = $("[data-ai-cp]"), cpText = $("[data-ai-cp-text]"), pos = $("[data-ai-pos]"), neg = $("[data-ai-neg]"), go = $("[data-ai-go]"), err = $("[data-ai-err]");
+
+    var render = function () {
+      $$("[data-ai-mode]").forEach(function (b) { b.setAttribute("aria-checked", String(b.getAttribute("data-ai-mode") === st.mode)); });
+      $$("[data-ai-panel]").forEach(function (p) { p.hidden = p.getAttribute("data-ai-panel") !== st.mode; });
+      $$("[data-ai-n]").forEach(function (n) { n.textContent = st.n; });
+      $$("[data-ai-cost]").forEach(function (n) { n.textContent = st.n * 10; });
+      var open = !cp.hidden || !!(og && !og.hidden);
+      go.innerHTML = open ? "Generate from Panel ↗" : st.mode === "template" ? "I'm Feeling Lucky" : "Generate";
+      var set = $$("[data-ai-q]").filter(function (s) { return s.value; }).length, hint = $("[data-ai-hint]");
+      hint.hidden = st.mode !== "template";
+      if (!og) hint.textContent = set ? set + " of 4 options set, the rest are randomized" : "All options currently randomized";
+      $$("[data-ai-q]").forEach(function (s) { s.classList.toggle("is-set", !!s.value); });
+      $("[data-ai-more]").setAttribute("aria-expanded", String(open));
+      // Custom Prompts panel
+      var tab = st.cpTab, modes = CP[tab], cur = modes.filter(function (m) { return m[0] === st.cpMode[tab]; })[0];
+      $$("[data-ai-cp-tab]").forEach(function (b) { b.setAttribute("aria-selected", String(b.getAttribute("data-ai-cp-tab") === tab)); });
+      $("[data-ai-cp-modes]").innerHTML = modes.map(function (m) { return '<button type="button" data-ai-cp-mode="' + m[0] + '" aria-pressed="' + (m[0] === cur[0]) + '">' + m[1] + "</button>"; }).join("");
+      $("[data-ai-cp-tlabel]").textContent = tab === "pos" ? "Your Prompt" : "Your Negative Prompt";
+      cpText.placeholder = cur[2];
+      if (cpText.value !== st.text[tab]) cpText.value = st.text[tab];
+      $("[data-ai-cp-count]").textContent = st.text[tab].length + " characters";
+      $("[data-ai-cp-info]").innerHTML = cur[3];
+      $("[data-ai-face]").hidden = !(tab === "pos" && cur[0] === "custom");
+      if (pos.value !== st.text.pos) pos.value = st.text.pos;
+      if (neg.value !== st.text.neg) neg.value = st.text.neg;
+    };
+
+    var generate = function (needPrompt) {
+      if (needPrompt && !st.text.pos.trim()) { err.hidden = false; (cp.hidden ? pos : cpText).focus(); return; }
+      err.hidden = true;
+      var grid = $("[data-ai-grid]"), h = "";
+      for (var i = 0; i < st.n; i++) { st.made++; h += '<div class="frame ai__tile"><span class="frame__tag">#' + st.made + "</span></div>"; }
+      grid.insertAdjacentHTML("afterbegin", h); grid.hidden = false; $("[data-ai-empty]").hidden = true;
+      $("[data-ai-gallery]").classList.add("has-items");
+      cp.hidden = true; if (og) og.hidden = true; render();
+      toast(st.n + " image" + (st.n > 1 ? "s" : "") + " added (demo placeholders).");
+    };
+
+    document.addEventListener("click", function (e) {
+      var t = e.target, b;
+      if ((b = t.closest("[data-ai-mode]"))) { st.mode = b.getAttribute("data-ai-mode"); err.hidden = true; cp.hidden = true; if (og) og.hidden = true; render(); return; }
+      if (t.closest("[data-ai-inc]")) { st.n = Math.min(8, st.n + 1); render(); return; }
+      if (t.closest("[data-ai-dec]")) { st.n = Math.max(1, st.n - 1); render(); return; }
+      if (t.closest("[data-ai-random]")) { $$("[data-ai-q]").forEach(function (s) { s.selectedIndex = 1 + Math.floor(Math.random() * (s.options.length - 1)); }); render(); return; }
+      if (t.closest("[data-ai-ppick]")) { $("[data-prompt-pick-dlg]").showModal(); return; }
+      if (t.closest("[data-ai-more]")) { var tgt = og && st.mode === "template" ? og : cp, was = tgt.hidden; cp.hidden = true; if (og) og.hidden = true; tgt.hidden = !was; render(); if (!cp.hidden) cpText.focus(); return; }
+      if (t.closest("[data-ai-cp-close]") || t.closest("[data-og-close]")) { cp.hidden = true; if (og) og.hidden = true; render(); return; }
+      if (t.closest("[data-og-go]")) { generate(false); return; }
+      if ((b = t.closest("[data-ai-cp-tab]"))) { st.cpTab = b.getAttribute("data-ai-cp-tab"); render(); return; }
+      if ((b = t.closest("[data-ai-cp-mode]"))) { st.cpMode[st.cpTab] = b.getAttribute("data-ai-cp-mode"); render(); return; }
+      if ((b = t.closest("[data-ai-tips-btn]"))) { var tips = $("[data-ai-tips]"); tips.hidden = !tips.hidden; b.setAttribute("aria-expanded", String(!tips.hidden)); return; }
+      if (t.closest("[data-ai-cp-go]")) { generate(true); return; }
+      if (t.closest("[data-ai-go]")) { generate(!cp.hidden || st.mode === "prompt"); return; }
+      // Avatar picker
+      var list = $("[data-ai-avatar-list]"), btn = $("[data-ai-avatar-btn]"), sd = $("[data-ai-set]");
+      if (list) {
+        if (t.closest("[data-ai-avatar-btn]")) { list.hidden = !list.hidden; btn.setAttribute("aria-expanded", String(!list.hidden)); return; }
+        if ((b = t.closest("[data-ai-pick]"))) { var nm = b.getAttribute("data-ai-pick"); $("[data-ai-av-name]").textContent = nm; $("[data-ai-av-initial]").textContent = nm.charAt(0); $$("[data-ai-pick]").forEach(function (o) { o.classList.toggle("is-on", o === b); }); }
+        if (t.closest("[data-ai-settings]")) { $("[data-ai-set-pick]").value = $("[data-ai-av-name]").textContent; $("[data-ai-set-save]").disabled = true; sd.showModal(); }
+        if (!list.hidden && (!t.closest("[data-ai-avatar]") || t.closest(".gen__model-opt"))) { list.hidden = true; btn.setAttribute("aria-expanded", "false"); }
+      }
+      // Avatar settings dialog
+      if (!sd) return;
+      if (t.closest("[data-ai-set-cancel]") || t === sd) { sd.close(); return; }
+      if (t.closest("[data-ai-set-add]")) { var n = $$("[data-ai-set-grid] label").length - 6; $("[data-ai-set-grid]").insertAdjacentHTML("beforeend", '<label><span>Custom <em>#' + n + '</em></span><input type="text" placeholder="e.g. green eyes"></label>'); $("[data-ai-set-save]").disabled = false; $$("[data-ai-set-grid] input").pop().focus(); return; }
+      if (sd.open && t.closest("[data-avatar-open]")) sd.close();
+    });
+    $$("[data-ai-q]").forEach(function (s) { s.addEventListener("change", render); });
+    pos.addEventListener("input", function () { st.text.pos = pos.value; err.hidden = true; render(); });
+    neg.addEventListener("input", function () { st.text.neg = neg.value; render(); });
+    cpText.addEventListener("input", function () { st.text[st.cpTab] = cpText.value; err.hidden = true; render(); });
+    var adv = $("[data-ai-adv]"); if (adv) adv.addEventListener("change", function () { $("[data-ai-adv-body]").hidden = !adv.checked; });
+    var up = $("[data-ai-up]"), upn = $("[data-ai-up-num]");
+    if (up) { up.addEventListener("input", function () { upn.value = up.value; }); upn.addEventListener("input", function () { up.value = upn.value; }); }
+    var sf = $("[data-ai-set-form]");
+    if (sf) { sf.addEventListener("input", function () { $("[data-ai-set-save]").disabled = false; }); sf.addEventListener("submit", function (e) { e.preventDefault(); $("[data-ai-set]").close(); toast("Avatar settings saved."); }); }
+    render();
+  });
+  </script>
+
+  <script>
+  /* Outfit Generator options. Demo data: replace DATA and OPTS with the real catalogue. */
+  document.addEventListener("DOMContentLoaded", function () {
+    var og = document.querySelector("[data-og]"); if (!og) return;
+    var $ = function (s) { return document.querySelector(s); }, $$ = function (s) { return [].slice.call(document.querySelectorAll(s)); };
+    var DATA = {
+      "Tops": { "T-Shirts & Tees": ["T-shirt", "Tee", "Off-shoulder tee", "Ruched front tee", "Ruffled one-shoulder tee", "Scoop-neck crop tee"], "Blouses & Shirts": ["Button-up shirt", "Silk blouse", "Wrap blouse"], "Tank Tops & Camis": ["Tank top", "Cami", "Halter top"], "Crop Tops": ["Crop top", "Cropped hoodie"], "Sweaters & Hoodies": ["Knit sweater", "Hoodie", "Cardigan"], "Corsets & Bustiers": ["Corset top", "Bustier"], "Sports & Athletic": ["Sports bra", "Training top"] },
+      "Bottoms": { "Jeans": ["Skinny jeans", "Wide-leg jeans", "Mom jeans"], "Skirts": ["Mini skirt", "Midi skirt", "Pleated skirt"], "Shorts": ["Denim shorts", "Bike shorts"], "Trousers": ["Tailored trousers", "Cargo pants"] },
+      "Dresses": { "Casual": ["Sundress", "Shirt dress", "T-shirt dress"], "Evening": ["Slip dress", "Maxi gown", "Cocktail dress"], "Bodycon": ["Bodycon mini", "Bodycon midi"] },
+      "Full Body": { "Jumpsuits": ["Jumpsuit", "Romper"], "Sets": ["Two-piece set", "Tracksuit"] },
+      "Swimwear": { "Bikinis": ["Triangle bikini", "Bandeau bikini"], "One-pieces": ["Classic one-piece", "Cut-out one-piece"] },
+      "Outerwear": { "Jackets": ["Leather jacket", "Denim jacket", "Bomber"], "Coats": ["Trench coat", "Puffer coat"] },
+      "Lingerie": { "Sets": ["Lace set", "Satin set"], "Bodysuits": ["Lace bodysuit"] },
+      "Costumes": { "Themed": ["Cosplay outfit", "Halloween costume"] }
+    };
+    var OPTS = {
+      color: ["Black", "White", "Red", "Blue", "Green", "Yellow", "Orange", "Pink", "Purple", "Brown", "Grey", "Beige"],
+      material: ["Cotton", "Silk", "Denim", "Leather", "Knit", "Velvet", "Lace", "Satin"],
+      pattern: ["Solid", "Floral", "Striped", "Plaid", "Polka dot", "Animal print"],
+      style: ["Casual", "Elegant", "Streetwear", "Vintage", "Sporty", "Minimalist"],
+      embell: ["Sequins", "Embroidery", "Buttons", "Ruffles", "Bows"]
+    };
+    var LABEL = { cat: "Category", sub: "Subcategory", art: "Article", color: "Primary Color", color2: "Secondary Color", style: "Style Modifier", material: "Material", pattern: "Pattern", embell: "Embellishments" };
+    var SUM = ["cat", "sub", "art", "color", "color2", "style", "material", "pattern", "embell"];
+    var v = { cat: "", sub: "", art: "", cat2: "", sub2: "", art2: "", color: "", color2: "none", style: "none", material: "none", pattern: "none", embell: "none" };
+    var view = "list", ex = {};
+    /* Counts as shown on the live site where known; the rest fall back to the sample data. */
+    var COUNT = { "cat|Tops": 129, "cat|Bottoms": 42, "cat|Dresses": 69, "cat|Full Body": 86, "cat|Swimwear": 60, "cat|Outerwear": 41, "sub|T-Shirts & Tees": 11, "sub|Blouses & Shirts": 7, "sub|Tank Tops & Camis": 13, "sub|Crop Tops": 16, "sub|Sweaters & Hoodies": 14, "sub|Corsets & Bustiers": 14, "sub|Sports & Athletic": 13 };
+    var allowed = function (f, list) { var ok = list.filter(function (x) { return !ex[f + "|" + x]; }); return ok.length ? ok : list; };
+    var opts = function (f) {
+      var two = /^(cat|sub|art)2$/.test(f) ? "2" : "", base = two ? f.slice(0, -1) : f, c = v["cat" + two], s = v["sub" + two];
+      if (base === "cat") return (two ? [""] : ["", "none"]).concat(Object.keys(DATA));
+      if (base === "sub") return [""].concat(DATA[c] ? Object.keys(DATA[c]) : []);
+      if (base === "art") return [""].concat(DATA[c] && DATA[c][s] ? DATA[c][s] : []);
+      if (f === "color") return ["", "none"].concat(OPTS.color);
+      return ["none", ""].concat(OPTS[f === "color2" ? "color" : f]);
+    };
+    var name = function (x) { return x === "" ? "Random" : x === "none" ? "None" : x; };
+    var esc = function (x) { return String(x).replace(/&/g, "&amp;").replace(/"/g, "&quot;"); };
+    var set = function (f, val) {
+      v[f] = val;
+      if (f === "cat") { v.sub = ""; v.art = ""; } if (f === "sub") v.art = "";
+      if (f === "cat2") { v.sub2 = ""; v.art2 = ""; } if (f === "sub2") v.art2 = "";
+      render();
+    };
+    var render = function () {
+      $$("select[data-og-f]").forEach(function (sel) {
+        var f = sel.getAttribute("data-og-f");
+        sel.innerHTML = opts(f).map(function (x) { return '<option value="' + esc(x) + '">' + esc(name(x)) + "</option>"; }).join("");
+        sel.value = v[f];
+        sel.classList.toggle("is-set", v[f] !== "" && v[f] !== "none"); sel.classList.toggle("is-none", v[f] === "none");
+      });
+      var nr = SUM.filter(function (f) { return v[f] === ""; }), nn = SUM.filter(function (f) { return v[f] === "none"; }), chosen = SUM.filter(function (f) { return v[f] !== "" && v[f] !== "none"; });
+      $("[data-og-nrand]").textContent = nr.length + " Random"; $("[data-og-nnone]").textContent = "· " + nn.length + " None";
+      $("[data-og-chips]").innerHTML = nr.map(function (f) { return "<span>" + LABEL[f] + "</span>"; }).join("") + chosen.map(function (f) { return '<span class="is-set">' + LABEL[f] + ": " + esc(v[f]) + "</span>"; }).join("");
+      $("[data-ai-hint]").textContent = chosen.length ? chosen.length + " option" + (chosen.length > 1 ? "s" : "") + " set, the rest are randomized" : "All options currently randomized";
+      $("[data-og-sec-state]").textContent = v.cat2 || v.sub2 || v.art2 ? "Custom" : "Currently auto-matched";
+      $$("[data-og-view]").forEach(function (b) { b.setAttribute("aria-checked", String(b.getAttribute("data-og-view") === view)); });
+      $("[data-og-list]").hidden = view === "grid"; var grid = $("[data-og-grid]"); grid.hidden = view !== "grid";
+      if (view === "grid") grid.innerHTML = ["cat", "sub", "art"].map(function (f) {
+        var list = opts(f), real = list.filter(function (x) { return x !== "" && x !== "none"; });
+        var row = function (x) {
+          var key = f + "|" + x, special = x === "" || x === "none";
+          var n = special ? "" : COUNT[key] || (f === "cat" && DATA[x] ? Object.keys(DATA[x]).reduce(function (a, k) { return a + DATA[x][k].length; }, 0) : f === "sub" && DATA[v.cat] && DATA[v.cat][x] ? DATA[v.cat][x].length : "");
+          return '<div class="og__r' + (special ? " og__r--top" : "") + '">' + (special ? "" : '<input type="checkbox" data-og-inc="' + esc(key) + '" aria-label="Include ' + esc(x) + ' when randomizing"' + (ex[key] ? "" : " checked") + ">") +
+            '<button type="button" data-og-set="' + esc(key) + '" aria-pressed="' + (v[f] === x) + '"><span>' + esc(name(x)) + "</span>" + (n ? "<small>" + n + "</small>" : "") + "</button></div>";
+        };
+        return '<div class="og__col"><h4>' + LABEL[f] + "</h4>" + list.filter(function (x) { return x === "" || x === "none"; }).map(row).join("") +
+          (f === "art" ? '<div class="og__r og__r--top"><button type="button" class="og__custom" data-og-custom><span>Custom...</span></button></div>' : "") +
+          (real.length ? '<hr>' + real.map(row).join("") : '<p>Pick a ' + (f === "sub" ? "category" : "subcategory") + " first, or leave it on Random.</p>") + "</div>";
+      }).join("");
+    };
+    document.addEventListener("change", function (e) { var k = e.target.getAttribute && e.target.getAttribute("data-og-inc"); if (k) { ex[k] = !e.target.checked; return; } var f = e.target.getAttribute && e.target.getAttribute("data-og-f"); if (f) set(f, e.target.value); });
+    document.addEventListener("click", function (e) {
+      var t = e.target, b;
+      if (t.closest("[data-og-custom]")) { var pm = $('[data-ai-mode="prompt"]'); if (pm) pm.click(); var mo = $("[data-ai-more]"); if (mo) mo.click(); return; }
+      if ((b = t.closest("[data-og-set]"))) { var p = b.getAttribute("data-og-set"), k = p.indexOf("|"); set(p.slice(0, k), p.slice(k + 1)); return; }
+      if ((b = t.closest("[data-og-view]"))) { view = b.getAttribute("data-og-view"); render(); return; }
+      if (t.closest("[data-og-random]")) {
+        var pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
+        v.cat = pick(allowed("cat", Object.keys(DATA))); v.sub = pick(allowed("sub", Object.keys(DATA[v.cat]))); v.art = pick(allowed("art", DATA[v.cat][v.sub])); v.color = pick(OPTS.color); v.material = pick(OPTS.material); v.pattern = pick(OPTS.pattern);
+        render(); return;
+      }
+      if ((b = t.closest("[data-og-save]"))) { b.textContent = "Saved (demo)"; setTimeout(function () { b.textContent = "Save Preset"; }, 1600); return; }
+      if ((b = t.closest("[data-og-tips-btn]"))) { var tips = $("[data-og-tips]"); tips.hidden = !tips.hidden; b.setAttribute("aria-expanded", String(!tips.hidden)); }
+    });
+    render();
+  });
+  </script>
+
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

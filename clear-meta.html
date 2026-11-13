@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clear Meta | MegaBerry</title>
+  <meta name="description" content="Your MegaBerry studio.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="app" data-shell="app">
+  <script>try{if(localStorage.getItem("mb.theme")==="light")document.body.setAttribute("data-mode","light");if(localStorage.getItem("mb.side")==="collapsed")document.body.setAttribute("data-side","collapsed")}catch(e){}</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <div class="app">
+    <div class="app__scrim" data-app-scrim hidden></div>
+    <aside class="app__side" id="app-side" aria-label="Studio"></aside>
+    <div class="app__main">
+      <div class="app__bar" id="app-bar"></div>
+      <main id="main" class="app__content cm" data-cm>
+        <div class="cm__layout">
+          <aside class="cm__side">
+            <section class="cm__card"><h2>How It Works</h2><p>We strip all EXIF, GPS, camera, and embedded metadata, then return a clean copy for download. Clean files appear as original content on social platforms, helping boost your reach.</p><small>Max file size: 500MB</small></section>
+            <section class="cm__card"><h2>Supported Formats</h2><h3>Images</h3><p>JPG, JPEG, PNG, GIF, WebP, TIFF, TIF, BMP, HEIC, HEIF</p><h3>Videos</h3><p>MP4, MOV, AVI, MKV, WebM, M4V, 3GP, WMV, FLV</p></section>
+            <section class="cm__card"><h2>Your Stats</h2><dl class="cm__stats"><div><dt>Files Cleaned</dt><dd data-cm-count>96</dd></div><div><dt>Time Saved</dt><dd class="is-ok">3 hr 12 min</dd></div><div><dt>Data Saved</dt><dd class="is-ok">265.82 KB</dd></div></dl></section>
+          </aside>
+          <div class="cm__main">
+            <section class="cm__card"><div class="cm__head"><h1>Upload Zone</h1><span class="cm__pill" data-cm-queue>0/20 media</span></div>
+              <label class="gen__drop cm__drop" data-cm-drop><input type="file" accept="image/*,video/*" multiple hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><strong>Click or drag to upload</strong><small>Images and videos up to 500MB</small></label>
+            </section>
+            <div class="cm__filters">
+              <div class="gen__seg" role="radiogroup" aria-label="List"><button type="button" role="radio" aria-checked="true" data-cm-tab="history">History</button><button type="button" role="radio" aria-checked="false" data-cm-tab="archived">Archived</button></div>
+              <div class="gen__seg" role="radiogroup" aria-label="Media type"><button type="button" role="radio" aria-checked="true" data-cm-type-btn="all">All</button><button type="button" role="radio" aria-checked="false" data-cm-type-btn="image">Images</button><button type="button" role="radio" aria-checked="false" data-cm-type-btn="video">Videos</button></div>
+            </div>
+            <div class="cm__grid" data-cm-grid><div class="frame cm__tile" data-cm-type="image"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Image</span></div><div class="frame cm__tile" data-cm-type="video"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Video</span></div><div class="frame cm__tile" data-cm-type="video"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Video</span></div><div class="frame cm__tile" data-cm-type="image"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Image</span></div><div class="frame cm__tile" data-cm-type="video"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Video</span></div><div class="frame cm__tile" data-cm-type="image"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Image</span></div><div class="frame cm__tile" data-cm-type="image"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Image</span></div><div class="frame cm__tile" data-cm-type="video"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Video</span></div><div class="frame cm__tile" data-cm-type="image"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Image</span></div><div class="frame cm__tile" data-cm-type="image"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">Image</span></div></div>
+            <p class="cm__empty" data-cm-empty hidden>Nothing here yet.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var root = document.querySelector("[data-cm]"), $ = function (s) { return root.querySelector(s); }, $$ = function (s) { return [].slice.call(root.querySelectorAll(s)); };
+    var tab = "history", type = "all", count = 96, queued = 0;
+    var render = function () {
+      $$("[data-cm-tab]").forEach(function (b) { b.setAttribute("aria-checked", String(b.getAttribute("data-cm-tab") === tab)); });
+      $$("[data-cm-type-btn]").forEach(function (b) { b.setAttribute("aria-checked", String(b.getAttribute("data-cm-type-btn") === type)); });
+      var shown = 0; $$(".cm__tile").forEach(function (t) { var ok = tab === "history" && (type === "all" || t.getAttribute("data-cm-type") === type); t.hidden = !ok; if (ok) shown++; });
+      $("[data-cm-empty]").hidden = shown > 0; $("[data-cm-count]").textContent = count; $("[data-cm-queue]").textContent = queued + "/20 media";
+    };
+    var add = function (files) {
+      [].slice.call(files, 0, 20).forEach(function (f) { var k = /^video\//.test(f.type) ? "video" : "image"; $("[data-cm-grid]").insertAdjacentHTML("afterbegin", '<div class="frame cm__tile" data-cm-type="' + k + '"><span class="cm__ok" title="Cleaned"></span><span class="frame__tag">' + (k === "video" ? "Video" : "Image") + "</span></div>"); count++; });
+      render();
+    };
+    var drop = $("[data-cm-drop]"), inp = drop.querySelector("input");
+    inp.addEventListener("change", function () { add(inp.files); inp.value = ""; });
+    ["dragenter", "dragover"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add("is-over"); }); });
+    ["dragleave", "drop"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove("is-over"); }); });
+    drop.addEventListener("drop", function (e) { if (e.dataTransfer) add(e.dataTransfer.files); });
+    root.addEventListener("click", function (e) { var b; if ((b = e.target.closest("[data-cm-tab]"))) { tab = b.getAttribute("data-cm-tab"); render(); } else if ((b = e.target.closest("[data-cm-type-btn]"))) { type = b.getAttribute("data-cm-type-btn"); render(); } });
+    render();
+  });
+  </script>
+  <div class="toast" data-toast role="status" hidden></div>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

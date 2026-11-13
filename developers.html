@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-review>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Developer API | MegaBerry</title>
+  <meta name="description" content="Use MegaBerry from your own code. A REST API with API keys, scoped permissions, signed webhooks and the same plan limits as the site.">
+  <meta name="theme-color" content="#0c0a10">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/layout.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/docs.js" defer></script>
+</head>
+<body data-page="developers">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+
+  <main id="main">
+    <div class="container docs">
+
+      <details class="docs__nav" data-docs-nav open>
+        <summary>On this page</summary>
+        <nav class="docs__groups" aria-label="On this page"><div class="docs__group"><h2>Start</h2><a href="#overview">Overview</a><a href="#get-an-api-key">Get an API key</a><a href="#quickstart">Quickstart</a></div><div class="docs__group"><h2>Core</h2><a href="#authentication">Authentication</a><a href="#scopes">Scopes and operations</a><a href="#rate-limits">Rate limits and plan limits</a><a href="#idempotency">Idempotency</a><a href="#errors">Errors</a></div><div class="docs__group"><h2>Build</h2><a href="#webhooks">Webhooks</a><a href="#files-and-uploads">Files and uploads</a><a href="#models">Models</a></div><div class="docs__group"><h2>More</h2><a href="#changelog">Changelog</a><a href="#faq">FAQ</a></div></nav>
+      </details>
+
+      <article class="doc">
+
+        <section id="overview">
+          <p class="eyebrow hue-blue"><strong>●</strong> Developers</p>
+          <h1 style="margin-top:1rem">Developer API</h1>
+          <p class="doc__lede">Use MegaBerry from your own code, under the same plan and limits as the site. Everything below works with plain HTTPS and JSON. <span class="confirm">Confirm intro wording; the top of the original page was not in the recording</span></p>
+          <div class="actions doc__actions">
+            <a class="gk-btn gk-btn--solid" href="#get-an-api-key">Get an API key</a>
+            <a class="gk-btn" href="#quickstart">Run the quickstart</a>
+          </div>
+
+          <h3>Connection details</h3>
+          <dl class="kv">
+<div><dt>Base URL</dt><dd><code>https://api.megaberry.com</code></dd></div>
+<div><dt>Version</dt><dd>Every path starts with <code>/v1</code></dd></div>
+<div><dt>Format</dt><dd>JSON requests and responses</dd></div>
+<div><dt>Authentication</dt><dd>Secret API key, sent as <code>Authorization: Bearer</code> (or <code>X-API-Key</code>)</dd></div>
+<div><dt>Generation</dt><dd>Asynchronous: submit, then poll or receive a signed webhook</dd></div>
+</dl>
+
+          <h3>Getting started</h3>
+          <div class="step-cards">
+            <a class="step-card" href="#get-an-api-key"><b>Get an API key</b><span>Create a key in Settings and choose the scopes it needs.</span></a>
+            <a class="step-card" href="#models"><b>List your models</b><span>Read each model's input contract at startup.</span></a>
+            <a class="step-card" href="#quickstart"><b>Submit a generation</b><span>Send a prompt with an idempotency key, then poll it.</span></a>
+            <a class="step-card" href="#webhooks"><b>Get the result</b><span>Download the outputs, or receive a signed webhook when it finishes.</span></a>
+          </div>
+
+          <h3>What you can do</h3>
+          <div class="dcards">
+            <div class="dcard"><b>Generate</b><span>Images and videos with any model your plan includes, one at a time or in bulk.</span></div>
+            <div class="dcard"><b>Upload</b><span>Send source images, videos and audio once and reuse them across generations.</span></div>
+            <div class="dcard"><b>Analyze and edit</b><span>Describe images, analyze videos, caption, remove objects and extract frames.</span></div>
+            <div class="dcard"><b>Get notified</b><span>Signed webhooks tell your server the moment a generation completes.</span></div>
+          </div>
+
+          <div class="callout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><b>Call the API from your server</b><span>API keys are secrets. Never ship one in a web page or a mobile app. The API sends no CORS headers, so browsers cannot read its responses anyway.</span></div>
+
+          <p>Every operation is listed in the <a href="#">API reference</a> <span class="confirm">Add the API reference URL</span> with its parameters, request fields and required scopes, and with its response fields where they are published. The reference is generated from the published OpenAPI document. Use of the API is governed by the <a href="terms.html">Developer API Terms</a> <span class="confirm">Link the Developer API Terms</span>.</p>
+        </section>
+
+        <section id="get-an-api-key">
+          <h2>Get an API key</h2>
+          <ol class="list">
+            <li>Sign in and open <strong>Settings → Developer API</strong>.</li>
+            <li>Create a key: give it a name, choose its permissions, choose when it expires (or no expiry), and accept the Developer API Terms. Permissions come in plain-word groups that map to the <a href="#scopes">scopes</a> below. Only read access is selected at first: add only what your integration needs.</li>
+            <li>Copy the key. It starts with <code>tjp_sk_live_</code> and is shown only once: store it in a secret manager or an environment variable, never in source control.</li>
+          </ol>
+          <div class="callout callout--warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><b>The key is shown once</b><span>Copy it when you create it. If you lose it, rotate the key in Settings to get a new secret.</span></div>
+
+          <h3>Who can create keys</h3>
+          <ul class="list">
+            <li>Accounts on the Pro or Max plan with an active subscription.</li>
+            <li>With a verified email address.</li>
+            <li>In good standing: the account is active, its Developer API access is not suspended, and it has broken no content rule in the last 30 days.</li>
+          </ul>
+          <p>Creating keys yourself is rolling out in phases. Settings → Developer API lists any requirement your account does not meet yet. Until self-serve keys reach your account, the page offers <strong>Request API access</strong> instead: tell us which scopes you need and our team issues the key. Training permissions are issued by our team only.</p>
+          <p>Using the API at all needs a plan that includes it: requests from an account whose plan does not include Developer API access answer <code>403 forbidden</code>.</p>
+
+          <h3>Managing keys</h3>
+          <ul class="list">
+            <li>Use separate keys for separate integrations so you can revoke one without touching the others. An account can hold a limited number of working keys; revoke one to create another.</li>
+            <li>Rotate a key in Settings to get a new secret with the same name and permissions, then deploy the new one. The old key keeps working for up to 24 hours (never past its own expiry) unless you cut it off now: do that when a key has leaked.</li>
+            <li>You accept the current Developer API Terms when you create or rotate a key. After the terms change, you accept the new version the next time you do either; your existing keys keep working meanwhile.</li>
+            <li>Revoking takes effect on the key's next request. A revoked or expired key answers <code>401 unauthorized</code>.</li>
+            <li>Keys issued before this format start with <code>sk_</code>. They keep working, and everything on this page applies to them too.</li>
+          </ul>
+        </section>
+
+        <section id="quickstart">
+          <h2>Quickstart</h2>
+          <p>List the models your key can use, pick one that runs on a prompt alone, submit a generation with an idempotency key, poll it until it finishes, then download the outputs. A model runs on a prompt alone when its <code>supports_avatar</code> is false, its <code>input_schema</code> has a <code>prompt</code> property and lists no other required field, and its <code>batch_size_min</code> is null or 1.</p>
+          <p><code>supports_avatar: true</code> means a model accepts an avatar, not that it runs without one, so the samples never pick such a model; when no model qualifies they stop with a message instead of submitting. Other models may need more: an avatar, upload ids for their media fields (see <a href="#files-and-uploads">Files and uploads</a>), the options their schema requires, or a larger <code>batch_size</code>.</p>
+          <div class="codetabs" data-codetabs><div class="codetabs__bar"><div class="codetabs__tabs" role="tablist" aria-label="Quickstart language"><button type="button" role="tab" id="ct1-t0" aria-controls="ct1-p0" aria-selected="true">curl</button><button type="button" role="tab" id="ct1-t1" aria-controls="ct1-p1" aria-selected="false" tabindex="-1">JavaScript</button><button type="button" role="tab" id="ct1-t2" aria-controls="ct1-p2" aria-selected="false" tabindex="-1">Python</button></div><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><div role="tabpanel" id="ct1-p0" aria-labelledby="ct1-t0"><pre tabindex="0"><code>#!/usr/bin/env bash
+<span class="c"># Save as quickstart.sh and run: API_KEY=&quot;tjp_sk_live_...&quot; bash quickstart.sh</span>
+<span class="c"># Your key is in Settings » Developer API. Needs curl 7.76 or later, and jq.</span>
+set -euo pipefail
+: &quot;${API_KEY:?Set API_KEY to your Developer API key}&quot;
+
+<span class="c"># 1. List the models your key can use and pick one that runs on a prompt alone:</span>
+<span class="c">#    supports_avatar is false (it takes no avatar, so it cannot need one), its</span>
+<span class="c">#    input_schema has a &quot;prompt&quot; property and requires no other field, and its</span>
+<span class="c">#    batch_size_min is null or 1.</span>
+MODELS=$(curl -sS --fail-with-body &quot;https://api.megaberry.com/v1/models&quot; \
+  -H &quot;Authorization: Bearer $API_KEY&quot;) \
+  || { echo &quot;Listing models failed: $MODELS&quot; &gt;&amp;2; exit 1; }
+MODEL_ID=$(jq -r &#x27;[.data[]
+  | select(.supports_avatar == false)
+  | select(.input_schema.properties.prompt != null)
+  | select(((.input_schema.required // []) - [&quot;prompt&quot;]) == [])
+  | select((.batch_size_min // 1) &lt;= 1)]
+  | .[0].id // empty&#x27; &lt;&lt;&lt; &quot;$MODELS&quot;)
+if [ -z &quot;$MODEL_ID&quot; ]; then
+  echo &quot;No model your key can use runs on a prompt alone: read each model&#x27;s input_schema and supports_avatar&quot; &gt;&amp;2
+  exit 1
+fi
+echo &quot;model: $MODEL_ID&quot;
+
+<span class="c"># 2. Submit a generation. Reuse the same Idempotency-Key if you retry this request.</span>
+GENERATION=$(curl -sS --fail-with-body &quot;https://api.megaberry.com/v1/generations&quot; \
+  -H &quot;Authorization: Bearer $API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;Idempotency-Key: order-1042-render-1&quot; \
+  -d &quot;{\&quot;model\&quot;: \&quot;$MODEL_ID\&quot;, \&quot;prompt\&quot;: \&quot;A ceramic mug on a wooden table, soft morning light\&quot;}&quot;) \
+  || { echo &quot;Submit failed: $GENERATION&quot; &gt;&amp;2; exit 1; }
+GENERATION_ID=$(jq -r &#x27;.id&#x27; &lt;&lt;&lt; &quot;$GENERATION&quot;)
+echo &quot;generation: $GENERATION_ID&quot;
+
+<span class="c"># 3. Poll, with a pause between requests, until the generation finishes</span>
+while :; do
+  RESULT=$(curl -sS --fail-with-body &quot;https://api.megaberry.com/v1/generations/$GENERATION_ID&quot; \
+    -H &quot;Authorization: Bearer $API_KEY&quot;) \
+    || { echo &quot;Polling failed: $RESULT&quot; &gt;&amp;2; exit 1; }
+  STATUS=$(jq -r &#x27;.status&#x27; &lt;&lt;&lt; &quot;$RESULT&quot;)
+  case &quot;$STATUS&quot; in
+    succeeded | partially_succeeded | failed | rejected | canceled) break ;;
+  esac
+  sleep 5
+done
+echo &quot;status: $STATUS&quot;
+
+<span class="c"># 4. Download each output (items[].outputs[].url is a signed link, valid for 7 days)</span>
+jq -r &#x27;.items[].outputs[] | select(.url != null)
+  | &quot;\(.id).\(.mime_type | split(&quot;/&quot;)[1]) \(.url)&quot;&#x27; &lt;&lt;&lt; &quot;$RESULT&quot; \
+  | while read -r FILE URL; do
+      curl -sS --fail-with-body -o &quot;$FILE&quot; &quot;$URL&quot;
+    done</code></pre></div><div role="tabpanel" id="ct1-p1" aria-labelledby="ct1-t1" hidden><pre tabindex="0"><code><span class="c">// Save as quickstart.mjs and run: API_KEY=&quot;tjp_sk_live_...&quot; node quickstart.mjs</span>
+<span class="c">// Needs Node 18 or later.</span>
+import { writeFile } from &quot;node:fs/promises&quot;;
+
+const API = &quot;https://api.megaberry.com/v1&quot;;
+const auth = { Authorization: `Bearer ${process.env.API_KEY}` };
+
+async function call(path, init = {}) {
+  const res = await fetch(API + path, { ...init, headers: { ...auth, ...init.headers } });
+  const body = await res.json();
+  if (!res.ok) {
+    const e = body.error ?? {};
+    throw new Error(`${res.status} ${e.code}: ${e.message} (request_id ${e.request_id})`);
+  }
+  return body;
+}
+
+<span class="c">// 1. List the models your key can use and pick one that runs on a prompt alone</span>
+const { data: models } = await call(&quot;/models&quot;);
+const model = models.find((m) =&gt;
+  m.supports_avatar === false &amp;&amp;
+  m.input_schema.properties?.prompt &amp;&amp;
+  (m.input_schema.required ?? []).every((f) =&gt; f === &quot;prompt&quot;) &amp;&amp;
+  (m.batch_size_min ?? 1) &lt;= 1);
+if (!model) throw new Error(&quot;No model your key can use runs on a prompt alone&quot;);
+console.log(&quot;model:&quot;, model.id);
+
+<span class="c">// 2. Submit a generation. Reuse the same Idempotency-Key if you retry this request.</span>
+let gen = await call(&quot;/generations&quot;, {
+  method: &quot;POST&quot;,
+  headers: { &quot;Content-Type&quot;: &quot;application/json&quot;, &quot;Idempotency-Key&quot;: &quot;order-1042-render-1&quot; },
+  body: JSON.stringify({ model: model.id, prompt: &quot;A ceramic mug on a wooden table, soft morning light&quot; }),
+});
+console.log(&quot;generation:&quot;, gen.id);
+
+<span class="c">// 3. Poll, with a pause between requests, until the generation finishes</span>
+const finished = [&quot;succeeded&quot;, &quot;partially_succeeded&quot;, &quot;failed&quot;, &quot;rejected&quot;, &quot;canceled&quot;];
+while (!finished.includes(gen.status)) {
+  await new Promise((r) =&gt; setTimeout(r, 5000));
+  gen = await call(`/generations/${gen.id}`);
+}
+console.log(&quot;status:&quot;, gen.status);
+
+<span class="c">// 4. Download each output (url is a signed link, valid for 7 days)</span>
+for (const item of gen.items) {
+  for (const out of item.outputs) {
+    if (!out.url) continue;
+    const bytes = Buffer.from(await (await fetch(out.url)).arrayBuffer());
+    await writeFile(`${out.id}.${out.mime_type.split(&quot;/&quot;)[1]}`, bytes);
+  }
+}</code></pre></div><div role="tabpanel" id="ct1-p2" aria-labelledby="ct1-t2" hidden><pre tabindex="0"><code><span class="c"># Save as quickstart.py and run: API_KEY=&quot;tjp_sk_live_...&quot; python quickstart.py</span>
+<span class="c"># Needs Python 3.9 or later and the requests package.</span>
+import os
+import time
+import requests
+
+API = &quot;https://api.megaberry.com/v1&quot;
+session = requests.Session()
+session.headers[&quot;Authorization&quot;] = f&quot;Bearer {os.environ[&#x27;API_KEY&#x27;]}&quot;
+
+
+def call(method, path, **kwargs):
+    res = session.request(method, API + path, **kwargs)
+    body = res.json()
+    if not res.ok:
+        e = body.get(&quot;error&quot;, {})
+        raise RuntimeError(f&quot;{res.status_code} {e.get(&#x27;code&#x27;)}: {e.get(&#x27;message&#x27;)} (request_id {e.get(&#x27;request_id&#x27;)})&quot;)
+    return body
+
+
+<span class="c"># 1. List the models your key can use and pick one that runs on a prompt alone</span>
+models = call(&quot;GET&quot;, &quot;/models&quot;)[&quot;data&quot;]
+model = next((m for m in models
+              if m[&quot;supports_avatar&quot;] is False
+              and &quot;prompt&quot; in m[&quot;input_schema&quot;].get(&quot;properties&quot;, {})
+              and set(m[&quot;input_schema&quot;].get(&quot;required&quot;, [])) &lt;= {&quot;prompt&quot;}
+              and (m.get(&quot;batch_size_min&quot;) or 1) &lt;= 1), None)
+if model is None:
+    raise SystemExit(&quot;No model your key can use runs on a prompt alone&quot;)
+print(&quot;model:&quot;, model[&quot;id&quot;])
+
+<span class="c"># 2. Submit a generation. Reuse the same Idempotency-Key if you retry this request.</span>
+gen = call(&quot;POST&quot;, &quot;/generations&quot;,
+           headers={&quot;Idempotency-Key&quot;: &quot;order-1042-render-1&quot;},
+           json={&quot;model&quot;: model[&quot;id&quot;], &quot;prompt&quot;: &quot;A ceramic mug on a wooden table, soft morning light&quot;})
+print(&quot;generation:&quot;, gen[&quot;id&quot;])
+
+<span class="c"># 3. Poll, with a pause between requests, until the generation finishes</span>
+finished = {&quot;succeeded&quot;, &quot;partially_succeeded&quot;, &quot;failed&quot;, &quot;rejected&quot;, &quot;canceled&quot;}
+while gen[&quot;status&quot;] not in finished:
+    time.sleep(5)
+    gen = call(&quot;GET&quot;, f&quot;/generations/{gen[&#x27;id&#x27;]}&quot;)
+print(&quot;status:&quot;, gen[&quot;status&quot;])
+
+<span class="c"># 4. Download each output (url is a signed link, valid for 7 days)</span>
+for item in gen[&quot;items&quot;]:
+    for out in item[&quot;outputs&quot;]:
+        if out[&quot;url&quot;]:
+            data = requests.get(out[&quot;url&quot;], timeout=60).content
+            with open(f&quot;{out[&#x27;id&#x27;]}.{out[&#x27;mime_type&#x27;].split(&#x27;/&#x27;)[1]}&quot;, &quot;wb&quot;) as f:
+                f.write(data)</code></pre></div></div>
+          <p class="muted" style="margin-top:0.75rem"><span class="confirm">Check the JavaScript and Python samples against the originals; only curl was visible in the recording</span></p>
+
+          <h3>Generation statuses</h3>
+          <div class="dtable-wrap"><table class="dtable"><thead><tr><th scope="col">Status</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row"><code>queued</code></th><td>Accepted, waiting to start.</td></tr><tr><th scope="row"><code>processing</code></th><td>Running.</td></tr><tr><th scope="row"><code>succeeded</code></th><td>Every item finished with outputs.</td></tr><tr><th scope="row"><code>partially_succeeded</code></th><td>Some items succeeded and at least one did not. Read each item.</td></tr><tr><th scope="row"><code>failed</code></th><td>The generation could not be completed.</td></tr><tr><th scope="row"><code>rejected</code></th><td>Refused for a content-policy or input reason. Change the request before retrying.</td></tr><tr><th scope="row"><code>canceled</code></th><td>Stopped before it finished. Resubmit if you still need it.</td></tr></tbody></table></div>
+          <p><code>queued</code> and <code>processing</code> are the only unfinished statuses. Treat any status you do not recognise as unfinished. Poll every few seconds at most, or subscribe to a <a href="#webhooks">webhook</a> and fetch the generation once.</p>
+        </section>
+
+        <section id="authentication">
+          <h2>Authentication</h2>
+          <p>Send your key in the <code>Authorization</code> header as a bearer token. <code>X-API-Key</code> is accepted as an alternative. Keys are never accepted in a query string. A missing, revoked or expired key answers <code>401 unauthorized</code>.</p>
+          <div class="codetabs" data-codetabs><div class="codetabs__bar"><div class="codetabs__tabs" role="tablist" aria-label="Authentication header"><button type="button" role="tab" id="ct2-t0" aria-controls="ct2-p0" aria-selected="true">Authorization header</button><button type="button" role="tab" id="ct2-t1" aria-controls="ct2-p1" aria-selected="false" tabindex="-1">X-API-Key header</button></div><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><div role="tabpanel" id="ct2-p0" aria-labelledby="ct2-t0"><pre tabindex="0"><code>curl https://api.megaberry.com/v1/credits \
+  -H &quot;Authorization: Bearer $API_KEY&quot;</code></pre></div><div role="tabpanel" id="ct2-p1" aria-labelledby="ct2-t1" hidden><pre tabindex="0"><code>curl https://api.megaberry.com/v1/credits \
+  -H &quot;X-API-Key: $API_KEY&quot;</code></pre></div></div>
+          <p>Every response carries our id for the request in the <code>X-Request-ID</code> header, and errors repeat it as <code>request_id</code>: log it and include it when you contact support. You may send your own <code>X-Request-ID</code> to correlate with your logs. It is never used as the request id, but a plain value (8 to 64 letters, digits or hyphens, such as a UUID, that does not look like a key) is echoed back in <code>X-Client-Request-ID</code>.</p>
+        </section>
+
+        <section id="scopes">
+          <h2>Scopes and operations</h2>
+          <p>Each key holds a set of scopes, and each operation requires specific ones. A key without a required scope gets <code>403 forbidden_scope</code>. Give every key the fewest scopes it needs: a key that only submits and polls generations needs <code>models:read</code>, <code>generations:write</code> and <code>generations:read</code> (plus <code>uploads:write</code> if it sends media).</p>
+          <div class="ops" data-ops><div class="ops__tools"><input class="ops__search" type="search" placeholder="Filter operations, e.g. webhooks or /v1/generations" aria-label="Filter operations" data-ops-search><div class="ops__chips" role="group" aria-label="Filter by scope"><button type="button" class="chip" data-ops-filter="all" aria-pressed="true">All<small>43</small></button><button type="button" class="chip" data-ops-filter="models:read" aria-pressed="false">models:read<small>4</small></button><button type="button" class="chip" data-ops-filter="uploads:write" aria-pressed="false">uploads:write<small>1</small></button><button type="button" class="chip" data-ops-filter="generations:write" aria-pressed="false">generations:write<small>2</small></button><button type="button" class="chip" data-ops-filter="generations:read" aria-pressed="false">generations:read<small>2</small></button><button type="button" class="chip" data-ops-filter="account:read" aria-pressed="false">account:read<small>3</small></button><button type="button" class="chip" data-ops-filter="webhooks:manage" aria-pressed="false">webhooks:manage<small>8</small></button><button type="button" class="chip" data-ops-filter="authoring:write" aria-pressed="false">authoring:write<small>5</small></button><button type="button" class="chip" data-ops-filter="analysis:write" aria-pressed="false">analysis:write<small>2</small></button><button type="button" class="chip" data-ops-filter="analysis:read" aria-pressed="false">analysis:read<small>2</small></button><button type="button" class="chip" data-ops-filter="tools:write" aria-pressed="false">tools:write<small>3</small></button><button type="button" class="chip" data-ops-filter="tools:read" aria-pressed="false">tools:read<small>3</small></button><button type="button" class="chip" data-ops-filter="training:write" aria-pressed="false">training:write<small>3</small></button><button type="button" class="chip" data-ops-filter="training:read" aria-pressed="false">training:read<small>5</small></button></div></div><p class="muted ops__empty" data-ops-empty hidden>No operation matches that filter.</p><div class="ops__list"><div class="scope" data-scope="models:read"><div class="scope__head"><code class="scope__name">models:read</code><span class="scope__count">4 operations</span></div><p>List models and their input contracts, authoring configuration and avatars.</p><ul><li class="op" data-op><span class="method method--get">GET</span><span>/v1/models</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/avatars</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/avatars/{id}</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/models/{model}/authoring</span></li></ul></div><div class="scope" data-scope="uploads:write"><div class="scope__head"><code class="scope__name">uploads:write</code><span class="scope__count">1 operation</span></div><p>Create uploads for source media.</p><ul><li class="op" data-op><span class="method method--post">POST</span><span>/v1/uploads</span></li></ul></div><div class="scope" data-scope="generations:write"><div class="scope__head"><code class="scope__name">generations:write</code><span class="scope__count">2 operations</span></div><p>Submit single and bulk generations.</p><ul><li class="op" data-op><span class="method method--post">POST</span><span>/v1/generations</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/generations/bulk</span></li></ul></div><div class="scope" data-scope="generations:read"><div class="scope__head"><code class="scope__name">generations:read</code><span class="scope__count">2 operations</span></div><p>Poll and list generations and download their outputs.</p><ul><li class="op" data-op><span class="method method--get">GET</span><span>/v1/generations</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/generations/{id}</span></li></ul></div><div class="scope" data-scope="account:read"><div class="scope__head"><code class="scope__name">account:read</code><span class="scope__count">3 operations</span></div><p>Read the credit balance and Developer API usage.</p><ul><li class="op" data-op><span class="method method--get">GET</span><span>/v1/credits</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/me</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/usage</span></li></ul></div><div class="scope" data-scope="webhooks:manage"><div class="scope__head"><code class="scope__name">webhooks:manage</code><span class="scope__count">8 operations</span></div><p>Create, list, pause, resume, test and delete webhook endpoints, and replay deliveries.</p><ul><li class="op" data-op><span class="method method--get">GET</span><span>/v1/webhooks</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/webhooks</span></li><li class="op" data-op><span class="method method--delete">DELETE</span><span>/v1/webhooks/{id}</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/webhooks/{id}/deliveries</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/webhooks/{id}/deliveries/{deliveryId}/replay</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/webhooks/{id}/pause</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/webhooks/{id}/resume</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/webhooks/{id}/test</span></li></ul></div><div class="scope" data-scope="authoring:write"><div class="scope__head"><code class="scope__name">authoring:write</code><span class="scope__count">5 operations</span></div><p>Save, update, delete and favorite prompt-builder presets.</p><ul><li class="op" data-op><span class="method method--post">POST</span><span>/v1/presets</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/presets/global/{id}/default</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/presets/global/{id}/favorite</span></li><li class="op" data-op><span class="method method--patch">PATCH</span><span>/v1/presets/{kind}/{id}</span></li><li class="op" data-op><span class="method method--delete">DELETE</span><span>/v1/presets/{kind}/{id}</span></li></ul></div><div class="scope" data-scope="analysis:write"><div class="scope__head"><code class="scope__name">analysis:write</code><span class="scope__count">2 operations</span></div><p>Submit image and video analyses.</p><ul><li class="op" data-op><span class="method method--post">POST</span><span>/v1/analyses/image</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/analyses/video</span></li></ul></div><div class="scope" data-scope="analysis:read"><div class="scope__head"><code class="scope__name">analysis:read</code><span class="scope__count">2 operations</span></div><p>Discover analysis options and poll analyses.</p><ul><li class="op" data-op><span class="method method--get">GET</span><span>/v1/analyses/capabilities</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/analyses/{id}</span></li></ul></div><div class="scope" data-scope="tools:write"><div class="scope__head"><code class="scope__name">tools:write</code><span class="scope__count">3 operations</span></div><p>Run captions, inpaint and frame extraction.</p><ul><li class="op" data-op><span class="method method--post">POST</span><span>/v1/tools/captions</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/tools/frames</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/tools/inpaint</span></li></ul></div><div class="scope" data-scope="tools:read"><div class="scope__head"><code class="scope__name">tools:read</code><span class="scope__count">3 operations</span></div><p>Discover tool options and poll tool results.</p><ul><li class="op" data-op><span class="method method--get">GET</span><span>/v1/tools/capabilities</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/tools/captions/{id}</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/tools/inpaint/{id}</span></li></ul></div><div class="scope" data-scope="training:write"><div class="scope__head"><code class="scope__name">training:write</code><span class="scope__count">3 operations</span></div><p>Prepare training photos, start and cancel training.</p><ul><li class="op" data-op><span class="method method--post">POST</span><span>/v1/training</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/training/captions</span></li><li class="op" data-op><span class="method method--post">POST</span><span>/v1/training/{id}/cancel</span></li></ul></div><div class="scope" data-scope="training:read"><div class="scope__head"><code class="scope__name">training:read</code><span class="scope__count">5 operations</span></div><p>Read training requirements, history and trained avatars.</p><ul><li class="op" data-op><span class="method method--get">GET</span><span>/v1/training</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/training/avatars</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/training/capabilities</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/training/captions</span></li><li class="op" data-op><span class="method method--get">GET</span><span>/v1/training/{id}</span></li></ul></div></div></div>
+        </section>
+
+        <section id="rate-limits">
+          <h2>Rate limits and plan limits</h2>
+          <p>The API follows your plan's limits and adds rate limits of its own. Generations you start through the API count against the same plan limits as generations you start on the site: daily generations, generations running at once, batch size, storage and your credit balance. What your plan cannot do on the site, it cannot do through the API. Your plan is on the <a href="pricing.html">plans page</a>.</p>
+          <p>On top of that, the API limits request rates (per account, per key and per client address), generation throughput, and daily and monthly credit spend. These limits can only make your plan's limits tighter, never looser, and they can differ between accounts. A request refused by the per-key limit does not count against your account's request limit.</p>
+          <ul class="list">
+            <li><code>429 rate_limited</code>: too many requests, too many generations running or starting at once, or too many failed authentication attempts from one address. Slow down and retry.</li>
+            <li><code>429 quota_exceeded</code>: a daily or monthly limit is reached (generations or credit spend), or too many uploads are waiting to be used. Retrying soon fails the same way: wait for the limit to reset, or use the uploads you already created.</li>
+            <li><code>402 insufficient_credits</code>: your balance cannot cover the request.</li>
+          </ul>
+          <p>A rate-limited response carries <code>Retry-After</code> (in seconds) whenever the wait is known: never retry sooner. Responses may also carry <code>RateLimit-Limit</code>, <code>RateLimit-Remaining</code> and <code>RateLimit-Reset</code> (and the same values as <code>X-RateLimit-*</code>), describing the request-rate limit closest to running out; not every <code>429</code> has them. Back off exponentially on <code>429</code> and <code>5xx</code>, with jitter, especially when there is no <code>Retry-After</code>. Upload creation and frame extraction have their own short-term limits so one integration cannot crowd out others.</p>
+        </section>
+
+        <section id="idempotency">
+          <h2>Idempotency</h2>
+          <p>Send an <code>Idempotency-Key</code> header on requests that create billable work, and reuse the same key when you retry after a timeout or a network error. Keys are 1 to 256 letters, digits, dashes or underscores. Tie the key to your own job (for example <code>order-1042-render-1</code>) rather than generating a new one per attempt.</p>
+          <ul class="list">
+            <li>The same key with the same body within 24 hours replays the original response instead of creating a second generation.</li>
+            <li>The same key with a different body, or while the first request is still running, answers <code>409 idempotency_conflict</code>.</li>
+            <li>One exception, for <code>POST /v1/generations</code> and <code>POST /v1/generations/bulk</code> only: if every earlier attempt with the key was refused before anything was submitted (for example an unknown model, invalid input or a rate limit), you may send a corrected body with the same key, and the key then belongs to the corrected body. Once an attempt may have been submitted, only the original body can use the key. Analysis and tool requests always keep their original body.</li>
+            <li>Keys are scoped to your account, the API key that sent them and the endpoint. Finish retries before rotating an API key.</li>
+          </ul>
+          <p>These operations honour the header; others ignore it:</p>
+          <ul class="list"><li><code>POST /v1/generations</code></li><li><code>POST /v1/generations/bulk</code></li></ul>
+        </section>
+
+        <section id="errors">
+          <h2>Errors</h2>
+          <p>Every error has the same JSON envelope. Branch on <code>error.code</code>, show <code>error.message</code> to people, and log <code>error.request_id</code>. <code>details</code> appears only for field-level input errors. New codes may be added: handle an unknown code by its HTTP status.</p>
+          <div class="codeblock"><div class="codeblock__bar"><span>Error response</span><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><pre><code>{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;invalid_input&quot;,
+    &quot;message&quot;: &quot;The request does not match this model&#x27;s input contract.&quot;,
+    &quot;request_id&quot;: &quot;6f1c2d3e-8a9b-4c5d-9e0f-1a2b3c4d5e6f&quot;,
+    &quot;details&quot;: [
+      { &quot;path&quot;: &quot;/duration_seconds&quot;, &quot;message&quot;: &quot;must be less than or equal to 15&quot; }
+    ]
+  }
+}</code></pre></div>
+          <div class="dtable-wrap"><table class="dtable"><thead><tr><th scope="col">Code</th><th scope="col">HTTP</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row"><code>invalid_request</code></th><td class="num">400</td><td>The request body, a query parameter, a header, an upload or a webhook request is not valid. <code>message</code> says what to fix.</td></tr><tr><th scope="row"><code>invalid_input</code></th><td class="num">400</td><td>The options do not match the model's input contract. <code>details</code> lists each rejected field as a <code>path</code> with a <code>message</code>.</td></tr><tr><th scope="row"><code>unauthorized</code></th><td class="num">401</td><td>The API key is missing, malformed, revoked or expired.</td></tr><tr><th scope="row"><code>forbidden_scope</code></th><td class="num">403</td><td>The key is valid but lacks a scope this endpoint requires. Use a key with that scope.</td></tr><tr><th scope="row"><code>forbidden</code></th><td class="num">403</td><td>Your account or plan cannot use this resource (for example a model or content your plan or account does not include), or Developer API access is not included in your plan or not enabled for your account.</td></tr><tr><th scope="row"><code>content_rejected</code></th><td class="num">403</td><td>Content moderation refused the prompt or inputs. Change the content: sending it again unchanged is refused again.</td></tr><tr><th scope="row"><code>account_restricted</code></th><td class="num">403</td><td>Your account is restricted. Contact support.</td></tr><tr><th scope="row"><code>not_found</code></th><td class="num">404</td><td>The resource does not exist or is not available to your account. Both look the same on purpose.</td></tr><tr><th scope="row"><code>rate_limited</code></th><td class="num">429</td><td>A request-rate or concurrency limit was reached. Wait at least the number of seconds in <code>Retry-After</code> when it is present; otherwise back off exponentially.</td></tr><tr><th scope="row"><code>insufficient_credits</code></th><td class="num">402</td><td>Your credit balance cannot cover the request. Add credits on the site, then retry.</td></tr><tr><th scope="row"><code>quota_exceeded</code></th><td class="num">429</td><td>A daily or monthly limit (generations or credit spend) was reached, or too many uploads are waiting to be used. Wait for the limit to reset, or use the uploads you have.</td></tr><tr><th scope="row"><code>payload_too_large</code></th><td class="num">413</td><td>The request body is too large. Send media as uploads, never inline.</td></tr><tr><th scope="row"><code>idempotency_conflict</code></th><td class="num">409</td><td>The <code>Idempotency-Key</code> was reused with a different body, or the first request with that key is still running. Retry shortly, or use a new key for a new job.</td></tr><tr><th scope="row"><code>service_disabled</code></th><td class="num">503</td><td>The Developer API is temporarily unavailable. Retry with backoff.</td></tr><tr><th scope="row"><code>internal_error</code></th><td class="num">500</td><td>Unexpected server error; details are withheld. Retry with backoff, and contact support with the <code>request_id</code> if it persists.</td></tr></tbody></table></div>
+
+          <h3>Generation error codes</h3>
+          <p>A submitted generation can still fail later. Each failed, rejected or canceled item has a human-readable <code>error</code> (show it, do not parse it) and a stable <code>error_code</code> (branch on it). So does a succeeded item whose output is withheld (<code>access_denied</code>, see <a href="#models">Content rules</a>). The generation itself carries the most common item code when the whole generation failed, was rejected or was canceled. Retryable codes can succeed if sent again unchanged; the others will fail the same way until you change the inputs.</p>
+          <div class="dtable-wrap"><table class="dtable"><thead><tr><th scope="col">Code</th><th scope="col">Category</th><th scope="col">Retry</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row"><code>content_rejected</code></th><td>content</td><td class="no">no</td><td>The inputs or the result were refused by content policy. Change the prompt or inputs; the same request will be refused again.</td></tr><tr><th scope="row"><code>invalid_input</code></th><td>invalid input</td><td class="no">no</td><td>The request cannot succeed as sent, for example an unsupported duration, resolution or file, or a missing source image. Fix it.</td></tr><tr><th scope="row"><code>temporarily_unavailable</code></th><td>transient</td><td class="yes">yes</td><td>The item could not be completed right now. Retry the same request with exponential backoff.</td></tr><tr><th scope="row"><code>insufficient_credits</code></th><td>account</td><td class="no">no</td><td>The wallet could not fund this item. Add credits, then resubmit.</td></tr><tr><th scope="row"><code>generation_failed</code></th><td>unknown</td><td class="yes">yes</td><td>The item failed and nothing more specific is known. Retry once, then contact support with the request id.</td></tr><tr><th scope="row"><code>canceled</code></th><td>unknown</td><td class="yes">yes</td><td>The item was canceled before it finished (v1 has no cancel endpoint). Resubmit.</td></tr><tr><th scope="row"><code>access_denied</code></th><td>account</td><td class="no">no</td><td>An adult output is withheld because the account is not eligible for adult content now. The same request gets the same answer.</td></tr></tbody></table></div>
+        </section>
+
+        <section id="webhooks">
+          <h2>Webhooks</h2>
+          <p>Instead of polling, register an HTTPS endpoint and receive a signed <code>POST</code> when a generation finishes. Creating an endpoint returns its signing secret (<code>whsec_...</code>) once; store it with your other secrets.</p>
+          <div class="codeblock"><div class="codeblock__bar"><span>Create an endpoint</span><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><pre><code>curl https://api.megaberry.com/v1/webhooks \
+  -H &quot;Authorization: Bearer $API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;url&quot;: &quot;https://your-app.example/webhooks/generations&quot;, &quot;events&quot;: [&quot;generation.completed&quot;]}&#x27;</code></pre></div>
+
+          <h3>Events</h3>
+          <ul class="list">
+            <li><code>generation.completed</code>: a generation reached a final status. The body has the generation id, status, generation-level <code>error_code</code>, credits and your <code>metadata</code>, but no output links: fetch the generation for fresh links.</li>
+            <li><code>webhook.test</code>: sent by the test operation to check your endpoint. You cannot subscribe to it.</li>
+          </ul>
+          <p>Omit <code>events</code> (or send an empty list) to receive every event type. An account can register up to 16 endpoints.</p>
+          <div class="codeblock"><div class="codeblock__bar"><span>Event body</span><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><pre><code>{
+  &quot;id&quot;: &quot;evt_...&quot;,
+  &quot;type&quot;: &quot;generation.completed&quot;,
+  &quot;api_version&quot;: &quot;v1&quot;,
+  &quot;created_at&quot;: &quot;2026-10-18T12:00:08.000Z&quot;,
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;gen_...&quot;,
+    &quot;status&quot;: &quot;succeeded&quot;,
+    &quot;error_code&quot;: null,
+    &quot;model&quot;: &quot;MODEL_ID&quot;,
+    &quot;batch_size&quot;: 1,
+    &quot;credits_consumed&quot;: 10,
+    &quot;created_at&quot;: &quot;2026-10-18T12:00:00.000Z&quot;,
+    &quot;completed_at&quot;: &quot;2026-10-18T12:00:08.000Z&quot;,
+    &quot;metadata&quot;: { &quot;order_id&quot;: &quot;1042&quot; }
+  }
+}</code></pre></div>
+
+          <h3>Verify the signature</h3>
+          <p>Every delivery carries a <code>Studio-Signature</code> header: <code>t=&lt;unix seconds&gt;,v1=&lt;hex HMAC-SHA256&gt;</code>, computed over <code>{t}.{raw request body}</code> with your endpoint secret. Recompute it over the exact bytes you received, compare in constant time, and reject timestamps more than five minutes old.</p>
+          <div class="codeblock"><div class="codeblock__bar"><span>Delivery headers</span><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><pre><code>Content-Type: application/json
+Studio-Signature: t=1760788808,v1=5f2b...e9   # HMAC-SHA256 of &quot;{t}.{raw body}&quot;, hex
+Studio-Event-Id: evt_...                     # same on every retry of one event
+Studio-Delivery-Id: ...                      # one per delivery
+User-Agent: Studio-Webhooks/1.0</code></pre></div>
+          <div class="codetabs" data-codetabs><div class="codetabs__bar"><div class="codetabs__tabs" role="tablist" aria-label="Webhook verification language"><button type="button" role="tab" id="ct3-t0" aria-controls="ct3-p0" aria-selected="true">Node.js (Express)</button><button type="button" role="tab" id="ct3-t1" aria-controls="ct3-p1" aria-selected="false" tabindex="-1">Python (Flask)</button></div><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><div role="tabpanel" id="ct3-p0" aria-labelledby="ct3-t0"><pre tabindex="0"><code>import crypto from &#x27;node:crypto&#x27;
+import express from &#x27;express&#x27;
+
+const SECRET = process.env.WEBHOOK_SECRET // the whsec_... value shown once at creation
+const TOLERANCE_SECONDS = 300
+
+function verify(header, rawBody) {
+  const parts = Object.fromEntries(
+    header.split(&#x27;,&#x27;).map((part) =&gt; {
+      const i = part.indexOf(&#x27;=&#x27;)
+      return [part.slice(0, i), part.slice(i + 1)]
+    })
+  )
+  const timestamp = Number(parts.t)
+  if (!Number.isFinite(timestamp)) return false
+  if (Math.abs(Date.now() / 1000 - timestamp) &gt; TOLERANCE_SECONDS) return false
+  const expected = crypto
+    .createHmac(&#x27;sha256&#x27;, SECRET)
+    .update(`${timestamp}.${rawBody}`)
+    .digest(&#x27;hex&#x27;)
+  const given = Buffer.from(parts.v1 ?? &#x27;&#x27;)
+  return given.length === expected.length &amp;&amp; crypto.timingSafeEqual(Buffer.from(expected), given)
+}
+
+const app = express()
+
+<span class="c">// Use the RAW body: re-serialized JSON will not match the signature.</span>
+app.post(&#x27;/webhooks/generations&#x27;, express.raw({ type: &#x27;application/json&#x27; }), (req, res) =&gt; {
+  const rawBody = req.body.toString(&#x27;utf8&#x27;)
+  if (!verify(req.get(&#x27;Studio-Signature&#x27;) ?? &#x27;&#x27;, rawBody)) return res.sendStatus(400)
+  const event = JSON.parse(rawBody)
+  <span class="c">// Deliveries are at-least-once: skip an event id you have already handled.</span>
+  const eventId = req.get(&#x27;Studio-Event-Id&#x27;)
+  res.sendStatus(200) // answer quickly, then do the work
+  handleEvent(eventId, event)
+})</code></pre></div><div role="tabpanel" id="ct3-p1" aria-labelledby="ct3-t1" hidden><pre tabindex="0"><code>import hashlib
+import hmac
+import os
+import time
+
+from flask import Flask, abort, request
+
+SECRET = os.environ[&quot;WEBHOOK_SECRET&quot;]  # the whsec_... value shown once at creation
+TOLERANCE_SECONDS = 300
+app = Flask(__name__)
+
+
+def verify(header, raw_body):
+    parts = dict(p.split(&quot;=&quot;, 1) for p in header.split(&quot;,&quot;) if &quot;=&quot; in p)
+    try:
+        timestamp = int(parts[&quot;t&quot;])
+    except (KeyError, ValueError):
+        return False
+    if abs(time.time() - timestamp) &gt; TOLERANCE_SECONDS:
+        return False
+    expected = hmac.new(SECRET.encode(), f&quot;{timestamp}.&quot;.encode() + raw_body, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(parts.get(&quot;v1&quot;, &quot;&quot;), expected)
+
+
+@app.post(&quot;/webhooks/generations&quot;)
+def generations():
+    raw_body = request.get_data()  # the RAW body: re-serialized JSON will not match the signature
+    if not verify(request.headers.get(&quot;Studio-Signature&quot;, &quot;&quot;), raw_body):
+        abort(400)
+    <span class="c"># Deliveries are at-least-once: skip an event id you have already handled.</span>
+    event_id = request.headers.get(&quot;Studio-Event-Id&quot;)
+    handle_event(event_id, request.get_json())  # queue the work and answer quickly
+    return &quot;&quot;, 200</code></pre></div></div>
+          <p class="muted" style="margin-top:0.75rem"><span class="confirm">Check the Python sample against the original; only Node.js was visible in the recording</span></p>
+
+          <h3>Retries and delivery</h3>
+          <ul class="list">
+            <li>Answer with any <code>2xx</code> within 10 seconds. Redirects are not followed.</li>
+            <li>Anything else is retried with exponential backoff (about 12 attempts over roughly half a day). Deliveries are at-least-once: deduplicate on <code>Studio-Event-Id</code>.</li>
+            <li>After 20 consecutive failed deliveries the endpoint is paused automatically. You can also pause an endpoint yourself.</li>
+            <li>A paused endpoint receives no events. Events that occur while it is paused are not delivered to it, not even after you resume it: fetch or list your generations to catch up. Deliveries that were already pending when it paused are held, and resuming sends them; held deliveries older than 7 days are marked failed instead.</li>
+            <li>You can pause and resume an endpoint, list its recent deliveries, replay a failed delivery and send a test event at any time.</li>
+            <li>Endpoint URLs must use HTTPS and resolve to public internet addresses.</li>
+          </ul>
+        </section>
+
+        <section id="files-and-uploads">
+          <h2>Files and uploads</h2>
+          <p>Media goes in as uploads, never as URLs or inline data: create an upload, send the bytes with a <code>PUT</code> to the returned <code>upload_url</code>, then pass the <code>upl_</code> id in the model's media field (for example <code>options.source_image</code>). The <code>Content-Type</code> and size of the <code>PUT</code> must match what you declared.</p>
+          <div class="codeblock"><div class="codeblock__bar"><span>Upload and use a file</span><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><pre><code><span class="c"># 1. Ask for an upload URL. size is the exact number of bytes.</span>
+curl https://api.megaberry.com/v1/uploads \
+  -H &quot;Authorization: Bearer $API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &quot;{\&quot;filename\&quot;: \&quot;photo.png\&quot;, \&quot;content_type\&quot;: \&quot;image/png\&quot;, \&quot;size\&quot;: $(wc -c &lt; photo.png)}&quot;
+
+<span class="c"># 2. PUT the bytes to upload_url with the same Content-Type</span>
+curl -X PUT &quot;UPLOAD_URL&quot; -H &quot;Content-Type: image/png&quot; --data-binary @photo.png
+
+<span class="c"># 3. Pass the upl_ id in the model&#x27;s media field (see its input_schema)</span>
+curl https://api.megaberry.com/v1/generations \
+  -H &quot;Authorization: Bearer $API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;model&quot;: &quot;MODEL_ID&quot;, &quot;prompt&quot;: &quot;Clean white background&quot;, &quot;options&quot;: {&quot;source_image&quot;: &quot;upl_...&quot;}}&#x27;</code></pre></div>
+          <div class="dtable-wrap"><table class="dtable"><thead><tr><th scope="col">Media</th><th scope="col">Content types</th><th scope="col">Max size</th></tr></thead><tbody><tr><th scope="row">Image</th><td><code>image/jpeg</code>, <code>image/png</code>, <code>image/gif</code>, <code>image/webp</code></td><td class="num">10 MB</td></tr><tr><th scope="row">Video</th><td><code>video/mp4</code>, <code>video/quicktime</code>, <code>video/webm</code>, <code>video/x-msvideo</code>, <code>video/x-matroska</code></td><td class="num">200 MB</td></tr><tr><th scope="row">Audio</th><td><code>audio/mpeg</code>, <code>audio/wav</code></td><td class="num">50 MB</td></tr></tbody></table></div>
+          <ul class="list">
+            <li>The upload URL is valid for about 15 minutes. An upload that is never used in a request expires after 24 hours; once used, you can reuse its id.</li>
+            <li>An account can hold only a limited number of unused uploads at once. Past that, creating an upload answers <code>429 quota_exceeded</code>: use the uploads you have, or wait for unused ones to expire.</li>
+            <li>A model may accept less than the limits above (format, dimensions, duration). Its <code>input_schema</code> says what it takes.</li>
+            <li>Uploads count toward your account's storage, the same as uploads on the site.</li>
+          </ul>
+
+          <h3>Outputs</h3>
+          <p>Each finished item lists its outputs with a signed download <code>url</code> valid for 7 days and an <code>expires_at</code>. Every poll of a generation returns fresh links, so store the generation id, not the link, and download what you want to keep. Treat links like passwords: anyone who has one can download the file. A <code>url</code> can be null briefly; poll again to get one.</p>
+        </section>
+
+        <section id="models">
+          <h2>Models</h2>
+          <p><code>GET /v1/models</code> lists the models published on the API that your account can use right now. Some models are available only to particular accounts, or to accounts that hold particular avatars; partner models are listed only when the site offers them on your plan; and adult models only to accounts eligible for adult content under the site's rules. The list changes, so read it at startup instead of hard-coding model ids. A listed model is not a reservation: plan limits, credits and content rules are checked again when you submit. Each model publishes:</p>
+          <ul class="list">
+            <li><code>id</code>: what you send as <code>model</code>.</li>
+            <li><code>input_schema</code>: a closed JSON Schema for the <code>prompt</code> and <code>options</code>. Unknown fields are rejected with <code>400 invalid_input</code>.</li>
+            <li><code>contract_version</code> and <code>contract_hash</code>: cache forms and validators by them; the version increases on breaking input changes.</li>
+            <li><code>batch_size_min</code>, <code>batch_size_max</code> and <code>supports_avatar</code>.</li>
+          </ul>
+          <div class="codeblock"><div class="codeblock__bar"><span>GET /v1/models</span><button type="button" class="copy-btn" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>Copy</span></button></div><pre><code>{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;MODEL_ID&quot;,
+      &quot;display_name&quot;: &quot;Model name&quot;,
+      &quot;input_schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;additionalProperties&quot;: false,
+        &quot;required&quot;: [&quot;prompt&quot;],
+        &quot;properties&quot;: {
+          &quot;prompt&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;maxLength&quot;: 2000 },
+          &quot;aspect_ratio&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [&quot;1:1&quot;, &quot;4:5&quot;, &quot;16:9&quot;] }
+        }
+      },
+      &quot;contract_version&quot;: 1,
+      &quot;contract_hash&quot;: &quot;9b1f...c2&quot;,
+      &quot;batch_size_min&quot;: null,
+      &quot;batch_size_max&quot;: null,
+      &quot;supports_avatar&quot;: false
+    }
+  ]
+}</code></pre></div>
+          <p class="muted" style="margin-top:0.75rem"><span class="confirm">Example trimmed to the fields listed above; check it against a real response</span></p>
+          <p>Models that take an avatar list the avatars your account can use at <code>GET /v1/avatars</code>, and <code>GET /v1/models/{model}/authoring</code> returns a model's prompt-builder options.</p>
+          <p>Partner models run one generation per request, as on the site: submit them with <code>POST /v1/generations</code>. <code>POST /v1/generations/bulk</code> refuses them with <code>400 invalid_input</code> on <code>/model</code>. A model that runs on a partner model is listed and accepted only when that partner model is available to your account through the API; otherwise it is not listed, and requests for it answer <code>404 not_found</code> or <code>403 forbidden</code>.</p>
+
+          <h3>Content rules</h3>
+          <p>The same content rules as the site apply to every request, and adult content follows the site's eligibility rules.</p>
+          <ul class="list">
+            <li>Partner models do not accept adult content for any account: an adult prompt or image input answers <code>403 content_rejected</code>.</li>
+            <li>For an account that is not eligible for adult content, every prompt and source image is screened, including caption, image and video analysis, object removal and frame extraction inputs. Adult content answers <code>403 content_rejected</code>; change the content, since sending it again unchanged is refused again.</li>
+            <li>If screening is briefly unavailable, the request is refused with <code>400 invalid_request</code> and can be retried. Video analysis can answer <code>429 rate_limited</code> with <code>Retry-After</code> while screening is busy.</li>
+            <li>Eligibility is checked again later, not only when you submit. If an account stops being eligible, its adult outputs are withheld: a generation item stays <code>succeeded</code> with no outputs and <code>error_code</code> <code>access_denied</code>, adult work that had not started ends <code>failed</code> with <code>access_denied</code> and is not charged, and an object-removal or video-analysis result comes back without its output, also with <code>access_denied</code>.</li>
+          </ul>
+        </section>
+
+        <section id="changelog">
+          <h2>Changelog</h2>
+          <p>The API is versioned in the path (<code>/v1</code>). Within a version we add fields, endpoints, models, statuses and codes without notice, so ignore fields you do not know and handle unknown codes by their HTTP status. Breaking changes are announced here.</p>
+          <div class="log"><div class="log__entry"><div class="log__head"><span class="log__date">2026-10-18</span><h3>Self-serve keys</h3></div><ul class="list"><li>Create, rotate and revoke your own keys in Settings → Developer API, rolling out in phases. When you rotate a key, the old key keeps working for up to 24 hours (never past its own expiry) unless you cut it off now.</li><li>New keys start with <code>tjp_sk_live_</code>. Keys that start with <code>sk_</code> keep working.</li></ul></div><div class="log__entry"><div class="log__head"><span class="log__date">2026-10-18</span><h3>Plan limits, content rules and request ids</h3></div><ul class="list"><li>Developer API access is a plan feature: an account whose plan does not include it gets <code>403 forbidden</code>. Work through the API counts against the same plan limits as the site, and the API adds request-rate, throughput and spend limits of its own.</li><li>Rate limits also apply per API key and per client address, and repeated failed authentication from one address is refused for a short time with <code>429 rate_limited</code>.</li><li><code>POST /v1/tools/captions</code> accepts at most 20 images per request.</li><li>Partner models run one generation per request: <code>POST /v1/generations/bulk</code> refuses them with <code>400 invalid_input</code>.</li><li>Partner models refuse adult content for every account (<code>403 content_rejected</code>). For accounts not eligible for adult content, caption, analysis, object-removal and frame-extraction inputs are screened too.</li><li>If an account stops being eligible for adult content, its adult outputs are withheld: the item keeps <code>succeeded</code> with no outputs and <code>error_code</code> <code>access_denied</code>.</li><li><code>X-Request-ID</code> and <code>request_id</code> are always our own id for the request. Your own <code>X-Request-ID</code> is no longer used as the request id; a plain value is echoed in <code>X-Client-Request-ID</code>.</li></ul></div><div class="log__entry"><div class="log__head"><span class="log__date">2026-10-18</span><h3>Public documentation</h3></div><ul class="list"><li>Guides, an API reference generated from the published OpenAPI document, and the Developer API Terms (draft).</li><li>The OpenAPI document now lists the scopes each operation requires (<code>x-studio-scopes</code>) and the shared error envelope with its codes.</li><li>Production base URL published: every example targets it.</li></ul></div><div class="log__entry"><div class="log__head"><span class="log__date">2026-10-17</span><h3>Webhook delivery controls</h3></div><ul class="list"><li>Pause and resume an endpoint. An endpoint is also paused automatically after repeated failed deliveries; resuming sends what it held.</li><li>List an endpoint's recent deliveries and replay a failed one.</li></ul></div></div>
+        </section>
+
+        <section id="faq">
+          <h2>Frequently asked questions</h2>
+          <div class="faq"><details class="faq__item"><summary>Can I call the API from a browser?</summary><div class="faq__a"><p>No. API keys are secrets and must never ship in a web page or a mobile app. The API sends no CORS headers, so browsers cannot read its responses anyway. Call it from your server.</p></div></details><details class="faq__item"><summary>Which plans include the Developer API?</summary><div class="faq__a"><p>Accounts on the Pro or Max plan with an active subscription, a verified email address and good standing can create keys. Using the API at all needs a plan that includes it: requests from an account whose plan does not include Developer API access answer <code>403 forbidden</code>.</p></div></details><details class="faq__item"><summary>Do API generations use the same limits and credits as the site?</summary><div class="faq__a"><p>Yes. Generations you start through the API count against the same plan limits as generations you start on the site: daily generations, generations running at once, batch size, storage and your credit balance. The API adds rate limits of its own, which can only make your plan's limits tighter.</p></div></details><details class="faq__item"><summary>How do I retry safely without creating duplicates?</summary><div class="faq__a"><p>Send an <code>Idempotency-Key</code> header on requests that create billable work and reuse the same key when you retry after a timeout or a network error. The same key with the same body within 24 hours replays the original response.</p></div></details><details class="faq__item"><summary>Should I poll or use webhooks?</summary><div class="faq__a"><p>Either works. Polling is the simplest: check the generation every few seconds at most. Webhooks tell your server the moment a generation completes, with a signed <code>POST</code>; deliveries are at-least-once, so deduplicate on <code>Studio-Event-Id</code>.</p></div></details><details class="faq__item"><summary>How long do output links last?</summary><div class="faq__a"><p>Each finished item lists its outputs with a signed download <code>url</code> valid for 7 days and an <code>expires_at</code>. Every poll returns fresh links, so store the generation id, not the link, and download what you want to keep.</p></div></details><details class="faq__item"><summary>Can I send media by URL?</summary><div class="faq__a"><p>No. Media goes in as uploads: create an upload, send the bytes with a <code>PUT</code> to the returned <code>upload_url</code>, then pass the <code>upl_</code> id in the model's media field. See Files and uploads for types and size limits.</p></div></details><details class="faq__item"><summary>What should I include when I contact support?</summary><div class="faq__a"><p>The <code>request_id</code> of the failing request. Every response carries it in the <code>X-Request-ID</code> header, and errors repeat it in the body.</p></div></details></div>
+        </section>
+
+        <div class="doc__foot">
+          <p>Questions or a problem with the API? <a href="contact.html">Contact us</a> and include the <code>request_id</code> of the failing request.</p>
+          <a class="doc__top" href="#main">Back to top ↑</a>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>
